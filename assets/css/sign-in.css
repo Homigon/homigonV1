@@ -1,0 +1,542 @@
+.sign-up{
+    width: 100%;
+    margin-bottom: 104px;
+}
+
+h3{
+    color: #fff;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 30px;
+}
+.sign-up .header{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    background: url("../img/Group\ 431.png");
+    height: 200px;
+    width: 100%;
+    /* z-index: 1000; */
+    
+
+}
+
+.hide{
+    display: none;
+    margin-top: 20px;
+}
+
+.sign-up .header h3{
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-top: 70px;
+
+}
+
+.sign-up .body{
+    margin-top: -20px;
+    padding: 0px 75px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+.sign-up .body .login{
+    width: 40%;
+
+}
+
+
+
+.sign-up .body .form{
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 22px;
+    width: 100%;
+    
+}
+
+.sign-up .body .form label{
+        margin: 50px 0px -20px 0px;
+    
+}
+.sign-up .body .form .password{
+    margin-top: 20px;
+}
+
+.sign-up .body .form input{
+    width: 100%;
+    border: none;
+    border-bottom: solid 1px #333;
+    margin: 10px 0px;
+}
+
+.sign-up .body .form input:focus{
+    outline: none;
+}
+.sign-up .body .form h3{
+    margin-top: 20px;
+    float: right; 
+    color: #ffc700; 
+    cursor: pointer;
+}
+
+.field-icon {
+    float: right;
+    margin-right: 20px;
+    margin-top: -40px;
+    position: relative;
+    z-index: 2;
+    cursor: pointer;
+    
+}
+
+.field-icon:hover{
+    background: #fff;
+    color: #333;
+}
+
+#password-icon-close{
+    display: none;
+}
+
+.sign-up .body .form .checkbox{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    margin: 40px 0px;
+}
+
+.sign-up .body .form .login-button .login-btn{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    background: #FFC700;
+    padding: 10px;
+    margin-top: 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    width:100%;
+    border:none;
+}
+
+.sign-up .body .create-an-account .logo img{
+    width: 100%;
+    margin-top: 50px;
+
+}
+
+.sign-up .body .create-an-account .description{
+    text-align: center;
+}
+
+
+
+.sign-up .body .create-an-account{
+    width: 40%;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    /* margin-top: 70px; */
+    
+}
+
+
+.sign-up .body .create-an-account .login-button .login-btn{
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    align-items: center;
+    color: #333;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #FFC700;
+    color: #333;
+    text-decoration: none;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 22px;
+    cursor: pointer;
+}
+
+
+
+/* forgot password */
+/* forgot password */
+.forgot-password{
+    display: none;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    background: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100%;
+    z-index: 2000;
+}
+
+.forgot-password-box{
+    background: #EFFAF8;
+    width: 500px;
+    height: 370px;
+    display: flex;
+    flex-flow: column;
+    /* justify-content: center; */
+    align-items: center;
+    margin: 3rem auto;
+    padding: 1.5rem 1.5rem 0rem 2rem;
+    border-radius: 10px;
+}
+
+.forgot-password h2{
+    /* margin-top: 25px; */
+    text-align: justify;
+}
+
+.forgot-password p{
+    text-align: center;
+    margin-top: 15px;
+}
+
+.forgot-password input{
+    margin-top: 25px;
+    width: 400px;
+    height: 70px;
+    padding: 20px;
+    border: 2px solid #33CCA8;
+    border-radius: 10px;
+}
+
+.forgot-password .button{
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    margin-top: 35px;
+
+}
+
+.forgot-password h3{
+    color: #FFC700;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+.forgot-password .submit{
+    margin-top: 8px;
+    margin-left: 70px;
+    padding: 0px 90px;
+    width: 250px;
+    height: 55px;
+    border: none;
+    color: #fff;
+    background: #FFC700;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+/* reset password */
+
+.reset-password{
+    display: none;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 2000;
+}
+
+.reset-password .reset-password-box{
+    width: 400px;
+    /* height: 550px; */
+    display: flex;
+    flex-flow: column;
+    /* justify-content: center; */
+    align-items: center;
+    margin: 2rem auto;
+    padding: 1.5rem 1.5rem 0rem 2rem;
+    background: #EFFAF8;
+    box-shadow: 0px 6px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+.reset-password h2{
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+    
+}
+
+.reset-password img{
+    margin-top: 25px;
+}
+
+.reset-password .reset-password-box p{
+    font-size: small;
+    margin-top: 25px;
+    text-align: center;
+}
+
+.reset-password .reset-password-box form{
+    width: 100%;
+}
+.reset-password .verification-code{
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.reset-password .verification-code input{
+    width: 50px;
+    height: 70px;
+    padding: 15px;
+    font-size: 1.5rem;
+    border: 2px solid #33CCA8;
+    border-radius: 10px;
+
+}
+
+.reset-password button{
+    margin-top: 50px;
+    height: 55px;
+    float: right;
+    width: 250px;
+    background: #FFC700;
+    color: #fff;
+    border: solid 2px #FFC700;
+    /* padding: 0px 50px; */
+    border-radius: 5px;
+    font-weight: 700;
+    position: relative;
+}
+
+.reset-password .reset-password-box .resend-div{
+    align-self: flex-end;
+}
+.reset-password .reset-password-box .resend-div a{
+    text-decoration: none;
+    color: #FFC700;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+/* new password */
+
+.new-password{
+    display: none;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    background: rgba(0, 0, 0, 0.1);
+    width: 100%;
+    height: 100%;
+    z-index: 2000;
+}
+
+.new-password-box{
+    background: #EFFAF8;
+    width: 500px;
+    height: 500px;
+    display: flex;
+    flex-flow: column;
+    /* justify-content: center; */
+    align-items: center;
+    margin: 3rem auto;
+    padding: 1.5rem 1.5rem 0rem 2rem;
+    border-radius: 10px;
+}
+
+.new-password h2{
+    margin-top: 25px;
+    text-align: center;
+}
+
+.new-password p{
+    text-align: center;
+    margin-top: 15px;
+}
+
+.new-password form{
+    display: flex;
+    width: 100%;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.new-password input{
+    margin-top: 25px;
+    width: 400px;
+    height: 70px;
+    padding: 20px;
+    border: 2px solid #33CCA8;
+    border-radius: 10px;
+}
+
+.new-password .button{
+    width: 100%;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-around;
+    margin-top: 35px;
+
+}
+
+.new-password h3{
+    color: #FFC700;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+.new-password .submit{
+    margin-top: 8px;
+    width: 250px;
+    border: none;
+    color: #fff;
+    background: #FFC700;
+    border-radius: 10px;
+}
+
+@media only screen and (max-width: 991px){
+    
+    .remove{
+        display: none;
+    }
+
+    .hide{
+        display: block;
+        width: 100%;
+        text-align: center;
+        margin: 30px 0;
+    }
+
+    .sign-up .body .create-an-account .logo img{
+        display: none;
+    }
+
+
+    .sign-up .header{
+        display: flex;
+        justify-content: flex-end;
+        flex-direction: column-reverse;
+    }
+
+    .sign-up .body{
+        padding: 0px 30px;
+        display: flex;
+        justify-content: center;
+        flex-flow: column;
+    }
+    
+    .sign-up .body .login{
+        /* display: flex; */
+        justify-content: center;
+        width: 100%;
+    }
+    .sign-up .body .form{
+        margin-top: 0;
+    }
+    .sign-up .body .form .login-button{
+        width: 100%;
+    }
+
+    .sign-up .body .create-an-account{
+        width: 100%;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: center;
+    }
+
+    .sign-up .body .create-an-account .login-button{
+        width: 100%;
+        margin-top: -12px;
+    }
+    .sign-up .body .create-an-account .login-button .login-btn{
+        margin-top: 0;
+    }
+
+}
+
+@media only screen and (max-width: 512px){
+
+    .forgot-password-box{
+        width: 300px;
+        height: 350px;
+        padding: 1.3rem;
+    }
+
+    .forgot-password p{
+        font-size: 14px;
+    }
+   
+    .forgot-password-box form{
+        
+        width: 100%;
+        
+        
+    }
+
+
+    .forgot-password input{
+        width: 100%;
+        height: 50px;
+    }
+
+    .forgot-password .button{
+        /* flex-flow: column; */
+        justify-content: center;
+    }
+
+    .forgot-password h3{
+        font-size: 1rem;
+    }
+
+    .forgot-password .button .submit{
+        width: 150px;
+        height: 45px;
+        margin-left: 20px;
+        padding: 0;
+
+    }
+
+    /* reset password */
+
+    .reset-password .reset-password-box{
+        width: 300px;
+    }
+    .reset-password button{
+        margin-top: 20px;
+        width: 150px;
+        height: 45px;
+        border-radius: 10px;
+        justify-content: space-between;
+    }
+
+    .new-password-box{
+        width: 300px;
+    }
+
+    .new-password-box input{
+        width: 100%;
+        height: 50px;
+    }
+
+    .new-password .submit{
+        width: 150px;
+    }
+
+
+}

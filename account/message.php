@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/css/account.css">
+    <link rel="stylesheet" href="../assets/css/media.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
+    <title>HOMIGON</title>
+</head>
+
+<body>
+    <section class="account">
+        <div class="content" id="con">
+            <nav>
+                <a href="./" class="logo"><img src="../images/House me 2.png" alt=""></a>
+                <div class="nav2" id="nav">
+
+                </div>
+                <ul id="link">
+                    <img src="../images/close-x.png" alt="" id="closeicon">
+                    <li><a href="list-a-house">List A House</a></li>
+                    <li><a href="product-listing">Rent</a></li>
+                    <li><a href="product-listing">Buy</a></li>
+                    <li class="i" id="account"><a href="sign-in">
+                            <img src="../images/user.png" alt="" style="height:1.2rem ; padding-right:.3rem;">
+                            <p> Account</p>
+                        </a>
+                    </li>
+                    <li class="i"><a href="faq">
+                            <img src="../images/icons8-help-30.png" style="width: 25px;" alt="">
+                            <p> Help </p>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="mediaM">
+                    <img src="../images/white-menu-icon-4 (1).jpg" alt="" id="menubar">
+                    <a href="sign-in"><img src="../images/user.png" alt="" id="acct"></a>
+                </div>
+            </nav>
+
+
+        </div>
+
+        <div class="black" id="blur">
+
+        </div>
+
+        <div class="mssage msage">
+            <div class="message  ">
+                <div class="type te" id="dash">
+
+                    <ul>
+
+                        <li class="i">
+                            <a href="dashboard">
+                                <img src="../images/7148740_category_variety_random_shuffle_icon 1.png" alt="">
+                                <br> Dashboard
+                            </a>
+                        </li>
+                        <li class="i">
+                            <a href="profile">
+                                <img src="../images/Vector (18).png" alt="">
+                                <br> My Profile
+                            </a>
+                        </li>
+                        <li class="i">
+                            <a href="message" style="color:#000 ;">
+                                <img src="../images/Vector (13).png" alt="">
+                                <br>My Messages
+                            </a>
+                        </li>
+                        <li class="i">
+                            <a href="listing">
+                                <img src="../images/bx_building-house.png" alt="">
+                                <br>My Listings
+                            </a>
+                        </li>
+                        <li class="i">
+                            <a href="houses">
+                                <img src="../images/Vector (8).png" alt="">
+                                <br>Saved Houses
+                            </a>
+                        </li>
+                        <li class="i">
+                            <a href="./">
+                                <img src="../images/Vector (9).png" alt="">
+                                <br>Upgrades
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mcontainer mc ">
+                <div class="dashboards">
+                    <img src="../images/Vector (23).png" alt="" id="dashb">
+                    <img src="../images/Vector (24).png" alt="" id="dashc">
+                </div>
+                <h2>My Messages</h2>
+                <p>See conversations</p>
+                <div class="container">
+                    <div class="small">
+                        <div class="contnt">
+                            <form>
+                                <div class="input">
+                                    <input type="search" name="" id="" placeholder="Type your search here">
+                                    <img src="../images/Vector (20).png" alt="">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="big">
+                        <div class="contnt">
+
+                            <div class="img">
+                                <p>You do not have any messages</p>
+                                <img src="../images/undraw_feeling_blue_-4-b7q 1.png" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </section>
+
+
+
+
+
+    <script src="../assets/js/account.js"></script>
+
+
+</body>
+
+</html>

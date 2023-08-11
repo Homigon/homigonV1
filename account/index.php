@@ -48,6 +48,15 @@ $session_id = $_SESSION['user_id'];
             </div>
         </div>
 
+        <?php
+        if ($user->getDetail($session_id, "verification_status") == "Not Verified" and $user->isAgent($session_id)) {
+            echo "<div style='width:100%;padding:20px 0px;background:crimson;color:white;font-size:14px;text-align:center;margin-top:-20px;'>Your account is not yet verified. Kindly click <a href='verify' style='color:orange;'><u>here</u></a> to verify your account.</div>";
+        }
+        if ($user->getDetail($session_id, "verification_status") == "Pending" and $user->isAgent($session_id)) {
+            echo "<div style='width:100%;padding:20px 0px;background:#ffc700;color:white;font-size:14px;text-align:center;margin-top:-20px;'>Your verification request is being reviewed.</div>";
+        }
+        ?>
+
 
         <svg width="100" height="100" fill="yellow"></svg>
         <div class="list lit ">
@@ -61,7 +70,7 @@ $session_id = $_SESSION['user_id'];
                 <img src="../images/Vector (3).png" alt="">
                 <p>See conversations</p>
             </a> -->
-            <a href="houses" class="contnt">
+            <a href="saved-items" class="contnt">
                 <h6>Saved Houses</h6>
                 <img src="../images/Vector (5).png" alt="">
                 <p>See all your saved houses</p>

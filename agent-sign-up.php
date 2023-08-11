@@ -15,6 +15,12 @@ if (isset($_POST['submit'])) {
     $confirm_password = mysqli_real_escape_string($db->conn, $_POST['confirm_password']);
     $is_owner_or_agent = mysqli_real_escape_string($db->conn, $_POST['is_owner_or_agent']);
 
+    $i = "";
+    if (isset($_POST['i'])) {
+        $i = mysqli_real_escape_string($db->conn, $_POST['i']);
+    }
+
+
     $result = $db->setQuery("SELECT * FROM users WHERE email='$email';");
     $numrows = mysqli_num_rows($result);
 
@@ -31,6 +37,7 @@ if (isset($_POST['submit'])) {
                 'phone' => $phone,
                 'password' => $password,
                 'is_owner_or_agent' => $is_owner_or_agent,
+                'i' => $i
             );
 
             // Send OTP email here...
@@ -97,6 +104,12 @@ if (isset($_POST['submit'])) {
 
                         if (isset($_GET['passwords_unmatched'])) {
                             echo "<div class='alert alert-warning'>Passwords do not match!</div>";
+                        }
+                        ?>
+
+                        <?php
+                        if (isset($_GET['i'])) {
+                            echo "<input type='hidden' name='i' value='" . $_GET['i'] . "' />";
                         }
                         ?>
                         <label for="">First Name</label><br>

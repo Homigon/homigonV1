@@ -424,7 +424,7 @@ if (isset($_POST['submit'])) {
             var size = input.files[0].size;
 
             var ext = imgname.substr((imgname.lastIndexOf('.') + 1));
-            if (ext == 'jpg' || ext == 'jpeg' || ext == 'png' || ext == 'gif' || ext == 'PNG' || ext == 'JPG' || ext == 'JPEG') {
+            if (ext == 'jpg' || ext == 'jpeg' || ext == 'png' || ext == 'PNG' || ext == 'JPG' || ext == 'JPEG') {
                 if (size <= 1000000) {
                     $.ajax({
                         url: "ajax-upload-item-image.php",
@@ -439,7 +439,7 @@ if (isset($_POST['submit'])) {
                         if (data.status == "FILE_SIZE_ERROR") {
                             alert("File size too big!");
                         } else if (data.status == "FILE_TYPE_ERROR") {
-                            alert(`Invalid file type. Kindly upload: 'jpeg', 'jpg', 'png', 'gif', 'PNG', 'JPEG' OR 'JPG'`);
+                            alert(`Invalid file type. Kindly upload: 'jpeg', 'jpg', 'png', 'PNG', 'JPEG' OR 'JPG'`);
                         } else if (data.status == "success") {
                             var src = data.id + "." + data.ext;
                             var preview_box = document.createElement("div");

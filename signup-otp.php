@@ -27,7 +27,13 @@ if (isset($_POST['submit'])) {
             $user->createUser($user_id, $details['user_type'], $details['firstname'], $details['lastname'], $details['email'], $details['phone'], $details['password'], $details['is_owner_or_agent']);
             $_SESSION['user_id'] = $user_id;
             $_SESSION['signup_details'] = "";
-            $admin->goTo("account", "signup_success");
+
+            if ($details['i'] != "") {
+                $i = $details['i'];
+                $admin->goTo("product", "i=$i");
+            } else {
+                $admin->goTo("account", "signup_success");
+            }
         } else {
             $admin->goTo("./", "invalid_signup");
         }

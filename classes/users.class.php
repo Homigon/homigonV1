@@ -34,12 +34,13 @@ class User
 
         $password = password_hash($password, PASSWORD_DEFAULT);
         $image = "default.svg";
+        $verification_status = "Not Verified";
         $status = "Active";
         $time = time();
         $time_created = date("M,d,Y h:i A");
         $date = date("d-m-y");
 
-        $result = $db->setQuery("INSERT INTO users (user_id, user_type, firstname, lastname, email, phone, password, image, is_owner_or_agent, status, time, date, time_created) VALUES ('$user_id', '$user_type', '$firstname', '$lastname', '$email', '$phone', '$password', '$image', '$is_owner_or_agent', '$status', '$time', '$date', '$time_created');");
+        $result = $db->setQuery("INSERT INTO users (user_id, user_type, firstname, lastname, email, phone, password, image, is_owner_or_agent, status, verification_status, time, date, time_created) VALUES ('$user_id', '$user_type', '$firstname', '$lastname', '$email', '$phone', '$password', '$image', '$is_owner_or_agent', '$status', '$verification_status', '$time', '$date', '$time_created');");
         return $result;
     }
 
@@ -241,6 +242,42 @@ class User
         } else {
             return false;
         }
+    }
+
+    public function saveItem($item_id, $user_id)
+    {
+        global $db;
+
+        $result = $db->setQuery("INSERT INTO saved_items (item_id, user_id) VALUES ('$item_id', '$user_id');");
+    }
+
+    public function haveSavedItem($item_id, $user_id)
+    {
+        global $db;
+
+        $result = $db->setQuery("SELECT * FROM saved_items WHERE item_id='$item_id' AND user_id='$user_id';");
+        $numrows = mysqli_num_rows($result);
+
+        if ($numrows > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function addVerification($user_id, $firstname, $lastname, $gender, $date_of_birth, $phone, $email, $country, $state, $lga, $residential_area, $means_of_identification, $identification_number, $images)
+    {
+        global $db;
+
+        $verification_id = uniqid();
+        $status = "Pending";
+        $time = time();
+        $date = date("d-m-y");
+
+        $time_created = date("M,d,Y h:i A");
+
+        $result = $db->setQuery("INSERT INTO verifications (verification_id, user_id, firstname, lastname, gender, date_of_birth, phone, email, country, state, lga, residential_area, means_of_identification, identification_number, images, status, time, date, time_created) VALUES ('$verification_id', '$user_id', '$firstname', '$lastname', '$gender', '$date_of_birth', '$phone', '$email', '$country', '$state', '$lga', '$residential_area', '$means_of_identification', '$identification_number', '$images', '$status', '$time', '$date', '$time_created');");
+        return $result;
     }
 }
 

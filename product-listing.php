@@ -1,3 +1,16 @@
+<?php
+session_start();
+
+include 'classes/database.class.php';
+include 'classes/admin.class.php';
+include 'classes/users.class.php';
+include 'classes/items.class.php';
+
+if (isset($_SESSION['user_id'])) {
+    $session_id = $_SESSION['user_id'];
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -35,13 +48,13 @@
         <!-- input search -->
         <div class="input">
             <form action="" method="get">
-                <input type="search" name="" id="" placeholder="Type your search here">
-                <i class="fa fa-search"></i>
+                <input type="search" name="query" id="" placeholder="Type your search here">
+                <button><i type="submit" class="fa fa-search"></i></button>
             </form>
 
         </div>
 
-        <h6>Houses for Rent</h6>
+        <!-- <h6>Houses for Rent</h6> -->
 
         <!-- house-filter -->
         <div class="house-filter">
@@ -50,321 +63,285 @@
                     <div class="filter-text">
                         <p>Filter<span style="margin-left: 10px;"><i class="fa fa-sliders"></i></span></p>
                     </div>
-                    <form action="" method="">
+                    <form action="product-listing" method="GET">
+
                         <div class="category">
-                            <h6>Category</h6>
-                            <div class="buy">
-                                <input type="checkbox" name="buy" id="buy">
-                                <label for="buy">Buy</label>
-                            </div>
-                            <div class="rent">
-                                <input type="checkbox" name="rent" id="rent">
-                                <label for="rent">Rent</label>
-                            </div>
-                            <div class="lease">
-                                <input type="checkbox" name="lease" id="lease">
-                                <label for="lease">Lease</label>
-                            </div>
+                            <h6 style="margin-bottom:20px;">Category</h6>
+                            <?php
+                            $categories = $admin->getCategories();
+                            if (isset($_GET['category'])) {
+                                $category = $_GET['category'];
+                            } else {
+                                $category = [];
+                            }
+                            ?>
+                            <?php
+                            foreach ($categories as $c) {
+                            ?>
+                                <div class="<?php echo $c ?>" style="margin-bottom:30px;">
+                                    <input type="checkbox" name="category[]" value="<?php echo $c ?>" <?php if (in_array($c, $category)) {
+                                                                                                            echo "checked";
+                                                                                                        } ?> id="<?php echo $c ?>">
+                                    <label for="<?php echo $c ?>"><?php echo $c ?></label>
+                                </div>
+                            <?php
+                            }
+                            ?>
+
                         </div>
                         <div class="type-of-house">
                             <h6>Type of House</h6>
+                            <?php
+                            $types = $admin->getTypes();
+                            if (isset($_GET['type'])) {
+                                $type = $_GET['type'];
+                            } else {
+                                $type = [];
+                            }
+                            ?>
+
+                            <?php
+                            foreach ($types as $t) {
+                            ?>
+                                <div class="flat">
+                                    <input type="checkbox" name="type[]" value="<?php echo $t; ?>" <?php if (in_array($t, $type)) {
+                                                                                                        echo "checked";
+                                                                                                    } ?> id="<?php echo $t; ?>">
+                                    <label for="<?php echo $t; ?>"><?php echo $t; ?></label>
+                                </div>
+                            <?php
+                            }
+                            ?>
+                            <!-- 
                             <div class="flat">
-                                <input type="checkbox" name="flat" id="flat">
+                                <input type="checkbox" name="type[]" value="Flat" id="flat">
                                 <label for="flat">Flat</label>
                             </div>
                             <div class="boys-quarters">
-                                <input type="checkbox" name="boys-quarters" id="boys-quarters">
+                                <input type="checkbox" name="type[]" value="Boys Quarter" id="boys-quarters">
                                 <label for="boys-quarters">Boys Quarters</label>
                             </div>
                             <div class="studio-apartment">
-                                <input type="checkbox" name="studio-apartment" id="studio-apartment">
+                                <input type="checkbox" name="type[]" value="Studio Apartment" id="studio-apartment">
                                 <label for="studio-apartment">Studio Apartment</label>
-                            </div>
+                            </div> -->
                         </div>
 
                         <div class="button">
-                            <button>Apply filter</button>
+                            <button name="filter">Apply filter</button>
                         </div>
 
                     </form>
 
-                    <h6 class="seemore" id="seemore" onclick="openfiltermodal()">see more <i class="fa fa-angle-double-right" aria-hidden="true"></i></h6>
+                    <h6 class="seemore" id="seemore" onclick="openfiltermodal()">More Options <i class="fa fa-angle-double-right" aria-hidden="true" style="margin-top:2px;margin-left:2px;"></i></h6>
                 </div>
                 <p class="filter-icon" id="filter-icon">Filter<span style="margin-left: 10px;"><i class="fa fa-sliders"></i></span></p>
             </div>
             <div class="houses-listing">
-                <div class="houses-listed">
+                <!-- <div class="houses-listed"> -->
 
-                    <a href="product">
-                        <div class="body">
+                <?php
+                $options = "WHERE status='Active'";
+                $parameters = "";
 
-                            <div class="img">
-                                <img src="assets/img/Rectangle 213-4.png" alt="">
-                                <div class="icon-price">
-                                    <div class="icons_and_more_description">
-                                        <div class="bed-icon">
-                                            <div class="bed-icon-img">
-                                                <img src="assets/img/bed-icon.png">
+                if (isset($_GET['page']) and is_numeric($_GET['page'])) {
+                    $page = $_GET['page'];
+                } else {
+                    $page = 1;
+                }
+                $limit = 10;
+                $offset = ($page - 1) * $limit;
+
+                // print_r($_GET['category']);
+                if (isset($_GET['category']) and $_GET['category'] != "" and is_array($_GET['category']) and $_GET['category'][0] != "") {
+
+                    // if (is_array($_GET['category'])) {
+                    $options .= " AND ";
+                    $x = 0;
+                    $count = count($_GET['category']);
+                    foreach ($_GET['category'] as $category) {
+                        $category = mysqli_real_escape_string($db->conn, $category);
+                        if ($x < ($count - 1)) {
+                            $options .= " category='$category' OR ";
+                        } else {
+                            $options .= " category='$category' ";
+                        }
+                        $x++;
+                        $parameters .= "&category[]=" . $category;
+                    }
+
+                    // } else {
+                    //     $category = mysqli_real_escape_string($db->conn, $_GET['category']);
+                    //     $options .= " AND category='$category' ";
+                    // }
+                }
+
+
+                if (isset($_GET['type']) and $_GET['type'] != "" and is_array($_GET['type']) and $_GET['type'][0] != "") {
+
+                    // if (is_array($_GET['type'])) {
+                    $options .= " AND ";
+                    $x = 0;
+                    $count = count($_GET['type']);
+                    foreach ($_GET['type'] as $item_type) {
+                        $item_type = mysqli_real_escape_string($db->conn, $item_type);
+                        if ($x < ($count - 1)) {
+                            $options .= " item_type='$item_type' OR ";
+                        } else {
+                            $options .= " item_type='$item_type' ";
+                        }
+                        $x++;
+                        $parameters .= "&type[]=" . $item_type;
+                    }
+
+                    // } else {
+                    //     $item_type = mysqli_real_escape_string($db->conn, $_GET['type']);
+                    //     $options .= " AND item_type='$item_type' ";
+                    // }
+                }
+
+                if (isset($_GET['rooms']) and $_GET['rooms'] != "") {
+                    $number_of_rooms = mysqli_real_escape_string($db->conn, $_GET['rooms']);
+                    $options .= " AND number_of_rooms='$number_of_rooms' ";
+                    $parameters .= "&rooms=" . $_GET['rooms'];
+                }
+
+
+
+                if (isset($_GET['bathrooms']) and $_GET['bathrooms'] != "") {
+                    $number_of_bathrooms = mysqli_real_escape_string($db->conn, $_GET['bathrooms']);
+                    $options .= " AND number_of_bathrooms='$number_of_bathrooms' ";
+                    $parameters .= "&bathrooms=" . $_GET['bathrooms'];
+                }
+
+                if (isset($_GET['toilets']) and $_GET['toilets'] != "") {
+                    $number_of_toilets = mysqli_real_escape_string($db->conn, $_GET['toilets']);
+                    $options .= " AND number_of_toilets='$number_of_toilets' ";
+                    $parameters .= "&toilets=" . $_GET['toilets'];
+                }
+
+                if (isset($_GET['location']) and $_GET['location'] != "") {
+                    $location = mysqli_real_escape_string($db->conn, $_GET['location']);
+                    $options .= " AND location LIKE '%$location%' ";
+                    $parameters .= "&location=" . $_GET['location'];
+                }
+
+                if (isset($_GET['query']) and $_GET['query'] != "") {
+                    $query = mysqli_real_escape_string($db->conn, $_GET['query']);
+                    $options .= " AND title LIKE '%$query%' OR location LIKE '%$query%' ";
+                    $parameters .= "&query=" . $_GET['query'];
+                }
+
+                if (isset($_GET['price_range']) and $_GET['price_range'] != "") {
+                    $price_range = mysqli_real_escape_string($db->conn, $_GET['price_range']);
+                    $pr = explode("-", $price_range);
+                    $from = $pr[0];
+                    $to = $pr[1];
+                    $options .= " AND price >= $from AND price <= $to ";
+                    $parameters .= "&price_range=" . $_GET['price_range'];
+                }
+
+                $result = $db->setQuery("SELECT * FROM items $options LIMIT $offset,$limit;");
+                $numrows = mysqli_num_rows($result);
+
+                if ($numrows > 0) {
+                    if ($numrows == 1) {
+                        echo "<p style='font-size:20px;color:#33CCA8;width:100%;text-align:center;'>$numrows result found.</p>";
+                    } else {
+                        echo "<p style='font-size:20px;color:#33CCA8;width:100%;text-align:center;font-weight:600;'><i>$numrows results found.</i></p>";
+                    }
+                ?>
+                    <div class="houses-listed">
+                        <?php
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            $images = json_decode($row['images']);
+                        ?>
+                            <a href="product?i=<?php echo $row['item_id']; ?>">
+                                <div href="product?i=<?php echo $row['item_id']; ?>" class="body">
+
+                                    <div class="img">
+                                        <img src="item-images/<?php echo $images[0]; ?>" alt="">
+                                        <div class="icon-price">
+                                            <div class="icons_and_more_description">
+                                                <div class="bed-icon">
+                                                    <div class="bed-icon-img">
+                                                        <img src="assets/img/bed-icon.png">
+                                                    </div>
+                                                    <p><?php echo $row['number_of_rooms']; ?></p>
+                                                </div>
+                                                <div class="bed-icon">
+                                                    <div class="bed-icon-img">
+                                                        <img src="assets/img/bathtub-icon.png">
+                                                    </div>
+                                                    <p><?php echo $row['number_of_bathrooms']; ?></p>
+                                                </div>
+                                                <div class="bed-icon">
+                                                    <div class="bed-icon-img">
+                                                        <img src="assets/img/bathroom-icon.png">
+                                                    </div>
+                                                    <p><?php echo $row['number_of_toilets']; ?></p>
+                                                </div>
+
                                             </div>
-                                            <p>4</p>
-                                        </div>
-                                        <div class="bed-icon">
-                                            <div class="bed-icon-img">
-                                                <img src="assets/img/bathtub-icon.png">
-                                            </div>
-                                            <p>4</p>
-                                        </div>
-                                        <div class="bed-icon">
-                                            <div class="bed-icon-img">
-                                                <img src="assets/img/bathroom-icon.png">
-                                            </div>
-                                            <p>4</p>
-                                        </div>
-
-                                    </div>
-                                    <div class="price"><span>&#8358;</span>500,000</div>
-                                </div>
-
-                            </div>
-
-                            <div class="description">
-                                <p style="font-weight: 700;">4 bedroom Block of Flats in Port Harcourt for Sale</p>
-                                <div class="location-and-time-listed">
-                                    <div><img src="assets/img/location.svg">
-                                        <p>Port-Harcourt</p>
-                                    </div>
-                                    <!-- <div><img src="assets/img/Vector.png" alt=""><p>2hrs</p></div> -->
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-
-                    <a href="product">
-                        <div class="body">
-
-                            <div class="img">
-                                <img src="assets/img/Rectangle 212.png" alt="">
-                                <div class="icon-price">
-                                    <div class="icons_and_more_description">
-                                        <div class="bed-icon">
-                                            <div class="bed-icon-img">
-                                                <img src="assets/img/bed-icon.png">
-                                            </div>
-                                            <p>4</p>
-                                        </div>
-                                        <div class="bed-icon">
-                                            <div class="bed-icon-img">
-                                                <img src="assets/img/bathtub-icon.png">
-                                            </div>
-                                            <p>4</p>
-                                        </div>
-                                        <div class="bed-icon">
-                                            <div class="bed-icon-img">
-                                                <img src="assets/img/bathroom-icon.png">
-                                            </div>
-                                            <p>4</p>
-                                        </div>
-
-                                    </div>
-                                    <div class="price"><span>&#8358;</span>500,000</div>
-                                </div>
-
-                            </div>
-
-                            <div class="description">
-                                <p style="font-weight: 700;">4 bedroom Block of Flats in Port Harcourt for Sale</p>
-                                <div class="location-and-time-listed">
-                                    <div><img src="assets/img/location.svg">
-                                        <p>Port-Harcourt</p>
-                                    </div>
-                                    <!-- <div><img src="assets/img/Vector.png" alt=""><p>2hrs</p></div> -->
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-
-                    <a href="product">
-                        <div class="body">
-
-                            <div class="img">
-                                <img src="assets/img/Rectangle 213.png" alt="">
-                                <div class="icon-price">
-                                    <div class="icons_and_more_description">
-                                        <div class="bed-icon">
-                                            <div class="bed-icon-img">
-                                                <img src="assets/img/bed-icon.png">
-                                            </div>
-                                            <p>4</p>
-                                        </div>
-                                        <div class="bed-icon">
-                                            <div class="bed-icon-img">
-                                                <img src="assets/img/bathtub-icon.png">
-                                            </div>
-                                            <p>4</p>
-                                        </div>
-                                        <div class="bed-icon">
-                                            <div class="bed-icon-img">
-                                                <img src="assets/img/bathroom-icon.png">
-                                            </div>
-                                            <p>4</p>
-                                        </div>
-
-                                    </div>
-                                    <div class="price"><span>&#8358;</span>500,000</div>
-                                </div>
-
-                            </div>
-
-                            <div class="description">
-                                <p style="font-weight: 700;">4 bedroom Block of Flats in Port Harcourt for Sale</p>
-                                <div class="location-and-time-listed">
-                                    <div><img src="assets/img/location.svg">
-                                        <p>Port-Harcourt</p>
-                                    </div>
-                                    <!-- <div><img src="assets/img/Vector.png" alt=""><p>2hrs</p></div> -->
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-
-                    <a href="product">
-                        <div class="body">
-
-                            <div class="img">
-                                <img src="assets/img/Rectangle 213-1.png" alt="">
-                                <div class="icon-price">
-                                    <div class="icons_and_more_description">
-                                        <div class="bed-icon">
-                                            <div class="bed-icon-img">
-                                                <img src="assets/img/bed-icon.png">
-                                            </div>
-                                            <p>4</p>
-                                        </div>
-                                        <div class="bed-icon">
-                                            <div class="bed-icon-img">
-                                                <img src="assets/img/bathtub-icon.png">
-                                            </div>
-                                            <p>4</p>
-                                        </div>
-                                        <div class="bed-icon">
-                                            <div class="bed-icon-img">
-                                                <img src="assets/img/bathroom-icon.png">
-                                            </div>
-                                            <p>4</p>
+                                            <div class="price"><span>&#8358;</span><?php echo number_format($row['price']); ?></div>
                                         </div>
 
                                     </div>
-                                    <div class="price"><span>&#8358;</span>500,000</div>
-                                </div>
 
-                            </div>
-
-                            <div class="description">
-                                <p style="font-weight: 700;">4 bedroom Block of Flats in Port Harcourt for Sale</p>
-                                <div class="location-and-time-listed">
-                                    <div><img src="assets/img/location.svg">
-                                        <p>Port-Harcourt</p>
+                                    <div class="description">
+                                        <p style="font-weight: 700;"><?php echo $row['title']; ?></p>
+                                        <div class="location-and-time-listed">
+                                            <div><img src="assets/img/location.svg">
+                                                <p><?php echo $row['location']; ?></p>
+                                            </div>
+                                            <!-- <div><img src="assets/img/Vector.png" alt=""><p>2hrs</p></div> -->
+                                        </div>
                                     </div>
-                                    <!-- <div><img src="assets/img/Vector.png" alt=""><p>2hrs</p></div> -->
                                 </div>
+                            </a>
+
+                        <?php
+                        }
+                        ?>
+                    </div>
+                <?php
+                } else {
+                    echo "<div style='width:100%;margin-top:10px;'>
+                            <div style='width:100%;text-align:center;margin-bottom:20px;'>
+                                 <i class='fa fa-search' style='font-size:100px;color:#33CCA8;opacity:0.8;'></i>
                             </div>
-                        </div>
-                    </a>
+                            <p style='color:lightgrey;font-size:23px;text-align:center;'>No Items Found!</p>
+                        </div>";
+                }
+                ?>
 
-                    <a href="product">
-                        <div class="body">
 
-                            <div class="img">
-                                <img src="assets/img/Rectangle 213-2.png" alt="">
-                                <div class="icon-price">
-                                    <div class="icons_and_more_description">
-                                        <div class="bed-icon">
-                                            <div class="bed-icon-img">
-                                                <img src="assets/img/bed-icon.png">
-                                            </div>
-                                            <p>4</p>
-                                        </div>
-                                        <div class="bed-icon">
-                                            <div class="bed-icon-img">
-                                                <img src="assets/img/bathtub-icon.png">
-                                            </div>
-                                            <p>4</p>
-                                        </div>
-                                        <div class="bed-icon">
-                                            <div class="bed-icon-img">
-                                                <img src="assets/img/bathroom-icon.png">
-                                            </div>
-                                            <p>4</p>
-                                        </div>
+                <p class="seemore-navigation">
+                    <?php
+                    $next_page = $page + 1;
+                    $previous_page = $page - 1;
+                    ?>
+                    <?php
+                    if ($page != 1) {
+                        echo "<a href='product-listing?page=$previous_page$parameters' class='previous'><i class='fa fa-angle-double-left'></i> Previous</a>";
+                    }
+                    ?>
+                    <a class='page'>(Page <?php echo $page; ?>) </a>
+                    <?php
+                    if ($numrows >= $limit) {
+                        echo "<a href='product-listing?page=$next_page$parameters' class='next'>Next <i class='fa fa-angle-double-right'></i></a>";
+                    }
+                    ?>
 
-                                    </div>
-                                    <div class="price"><span>&#8358;</span>500,000</div>
-                                </div>
+                </p>
 
-                            </div>
-
-                            <div class="description">
-                                <p style="font-weight: 700;">4 bedroom Block of Flats in Port Harcourt for Sale</p>
-                                <div class="location-and-time-listed">
-                                    <div><img src="assets/img/location.svg">
-                                        <p>Port-Harcourt</p>
-                                    </div>
-                                    <!-- <div><img src="assets/img/Vector.png" alt=""><p>2hrs</p></div> -->
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-
-                    <a href="product">
-
-                        <div class="body">
-
-                            <div class="img">
-                                <img src="assets/img/Rectangle 213-3.png" alt="">
-                                <div class="icon-price">
-                                    <div class="icons_and_more_description">
-                                        <div class="bed-icon">
-                                            <div class="bed-icon-img">
-                                                <img src="assets/img/bed-icon.png">
-                                            </div>
-                                            <p>4</p>
-                                        </div>
-                                        <div class="bed-icon">
-                                            <div class="bed-icon-img">
-                                                <img src="assets/img/bathtub-icon.png">
-                                            </div>
-                                            <p>4</p>
-                                        </div>
-                                        <div class="bed-icon">
-                                            <div class="bed-icon-img">
-                                                <img src="assets/img/bathroom-icon.png">
-                                            </div>
-                                            <p>4</p>
-                                        </div>
-
-                                    </div>
-                                    <div class="price"><span>&#8358;</span>500,000</div>
-                                </div>
-
-                            </div>
-
-                            <div class="description">
-                                <p style="font-weight: 700;">4 bedroom Block of Flats in Port Harcourt for Sale</p>
-                                <div class="location-and-time-listed">
-                                    <div><img src="assets/img/location.svg">
-                                        <p>Port-Harcourt</p>
-                                    </div>
-                                    <!-- <div><img src="assets/img/Vector.png" alt=""><p>2hrs</p></div> -->
-                                </div>
-                            </div>
-                        </div>
-
-                    </a>
-                </div>
             </div>
 
         </div>
-        <p class="seemore"><a href="product-listing">See More<i class="fa fa-angle-double-right"></i></a></p>
+        <!-- <p class="seemore">
+            <a href='product-listing' class='previous'><i class='fa fa-angle-double-left'></i> Previous</a>
+            <a href='product-listing'>Next <i class='fa fa-angle-double-right'></i></a>
+        </p> -->
 
 
         <!-- filter modal -->
@@ -374,27 +351,50 @@
                 <div class="filter-text">
                     <p>Filter<span style="margin-left: 10px;"><i class="fa fa-sliders"></i></span></p>
                 </div>
-                <form action="#" method="">
+                <form action="product-listing" method="GET">
                     <div class="filter-items">
                         <div class="items">
                             <h6>Category</h6>
-                            <div class="item1">
-                                <input type="checkbox" name="buy" id="buy">
-                                <label for="buy">Buy</label>
-                            </div>
-                            <div class="item2">
-                                <input type="checkbox" name="rent" id="rent">
-                                <label for="rent">Rent</label>
-                            </div>
-                            <div class="item3">
-                                <input type="checkbox" name="lease" id="lease">
-                                <label for="lease">Lease</label>
-                            </div>
+                            <?php
+                            $categories = $admin->getCategories();
+                            if (isset($_GET['category'])) {
+                                $category = $_GET['category'];
+                            } else {
+                                $category = [];
+                            }
+                            ?>
+                            <?php
+                            foreach ($categories as $c) {
+                            ?>
+                                <div class="item1">
+                                    <input type="checkbox" name="category[]" <?php if (in_array($c, $category)) {
+                                                                                    echo "checked";
+                                                                                } ?> value="<?php echo $c; ?>" id="<?php echo $c; ?>">
+                                    <label for="<?php echo $c; ?>"><?php echo $c; ?></label>
+                                </div>
+                            <?php
+                            }
+                            ?>
+
                         </div>
 
                         <div class="items">
                             <h6>Number of bedrooms</h6>
-                            <div class="item1">
+                            <select name="rooms" class="form-control">
+                                <option value="">[Select Bedrooms]</option>
+                                <option value="">Any</option>
+                                <?php
+                                for ($i = 1; $i < 1000; $i++) {
+                                    $rooms = $_GET['rooms'];
+                                    if ($rooms == $i) {
+                                        echo "<option selected>$i</option>";
+                                    } else {
+                                        echo "<option>$i</option>";
+                                    }
+                                }
+                                ?>
+                            </select>
+                            <!-- <div class="item1">
                                 <input type="checkbox" name="one-bedroom" id="one-bedroom">
                                 <label for="one-bedroom">1 bedroom</label>
                             </div>
@@ -409,28 +409,52 @@
                             <div class="item4">
                                 <input type="checkbox" name="four-bedroom" id="four-bedroom">
                                 <label for="four-bedrooms">4 bedrooms +</label>
-                            </div>
+                            </div> -->
                         </div>
 
                         <div class="items">
                             <h6>Type of House</h6>
-                            <div class="item1">
-                                <input type="checkbox" name="flat2" id="flat2">
-                                <label for="flat2">Flat</label>
-                            </div>
-                            <div class="item2">
-                                <input type="checkbox" name="studio-apartment" id="studio-apartment">
-                                <label for="studio-apartment">Studio apartment</label>
-                            </div>
-                            <div class="item3" boys-quarters>
-                                <input type="checkbox" name="boys-quarters" id="boys-quarters">
-                                <label for="boys-quarters">Boys quarters</label>
-                            </div>
+                            <?php
+                            $types = $admin->getTypes();
+                            if (isset($_GET['type'])) {
+                                $type = $_GET['type'];
+                            } else {
+                                $type = [];
+                            }
+                            ?>
+
+                            <?php
+                            foreach ($types as $t) {
+                            ?>
+                                <div class="item1">
+                                    <input type="checkbox" name="type[]" value="<?php echo $t; ?>" <?php if (in_array($t, $type)) {
+                                                                                                        echo "checked";
+                                                                                                    } ?> id="<?php echo $t; ?>">
+                                    <label for="flat2"><?php echo $t; ?></label>
+                                </div>
+                            <?php
+                            }
+                            ?>
+
                         </div>
 
                         <div class="items">
                             <h6>Number of Toilets</h6>
-                            <div class="item1">
+                            <select name="toilets" class="form-control">
+                                <option value="">[Select Toilets]</option>
+                                <option value="">Any</option>
+                                <?php
+                                for ($i = 1; $i < 1000; $i++) {
+                                    $toilets = $_GET['toilets'];
+                                    if ($toilets == $i) {
+                                        echo "<option selected>$i</option>";
+                                    } else {
+                                        echo "<option>$i</option>";
+                                    }
+                                }
+                                ?>
+                            </select>
+                            <!-- <div class="item1">
                                 <input type="checkbox" name="one-toilet" id="one-toilet">
                                 <label for="one-toilet">1 Toilet</label>
                             </div>
@@ -445,14 +469,28 @@
                             <div class="item4">
                                 <input type="checkbox" name="four-toilet" id="four-toilet">
                                 <label for="four-toilet">4 Toilets +</label>
-                            </div>
+                            </div> -->
 
 
                         </div>
 
                         <div class="items">
                             <h6>Number of bathrooms</h6>
-                            <div class="item1">
+                            <select name="bathrooms" class="form-control">
+                                <option value="">[Select Bathrooms]</option>
+                                <option value="">Any</option>
+                                <?php
+                                for ($i = 1; $i < 1000; $i++) {
+                                    $bathrooms = $_GET['bathrooms'];
+                                    if ($bathrooms == $i) {
+                                        echo "<option selected>$i</option>";
+                                    } else {
+                                        echo "<option>$i</option>";
+                                    }
+                                }
+                                ?>
+                            </select>
+                            <!-- <div class="item1">
                                 <input type="checkbox" name="one-bathroom" id="one-bathroom">
                                 <label for="one-bathroom">1 bathroom</label>
                             </div>
@@ -467,7 +505,7 @@
                             <div class="item4">
                                 <input type="checkbox" name="four-bathroom" id="four-bathroom">
                                 <label for="four-bathroom">4 bathrooms +</label>
-                            </div>
+                            </div> -->
 
 
                         </div>
@@ -493,6 +531,8 @@
     <script defer src="assets/js/bootstrap.min.js"></script>
     <script defer src="assets/js/product-listing.js"></script>
     <script defer src="assets/js/main.js"></script>
+
+
 </body>
 
 </html>

@@ -17,12 +17,35 @@ if (isset($_POST['submit'])) {
         $row = mysqli_fetch_assoc($result);
         if (password_verify($password, $row['password'])) {
             $_SESSION['user_id'] = $row['user_id'];
-            $admin->goTo("account", "login_success");
+            if (isset($_POST['i'])) {
+                $i = mysqli_real_escape_string($db->conn, $_POST['i']);
+                $admin->goTo("product", "i=$i");
+            } else {
+                $admin->goTo("account", "login_success");
+            }
         } else {
             $admin->goTo("sign-in", "invalid_password");
         }
     } else {
         $admin->goTo("sign-in", "invalid_email");
+    }
+}
+
+
+if (isset($_POST['submit_forgot_password'])) {
+    $email = mysqli_real_escape_string($db->conn, $_POST['email']);
+
+    $result = $db->setQuery("SELECT * FROM users WHERE email='$email';");
+    $numrows = mysqli_num_rows($result);
+
+    if ($numrows > 0) {
+        $row = mysqli_fetch_assoc($result);
+        $key_id = $admin->createPasswordRecoveryKey($row['user_id']);
+        // Send email here..
+
+        $admin->goTo("forgot-password-message-success", "email_sent");
+    } else {
+        $admin->goTo("sign-in", "forgot_password_invalid_email");
     }
 }
 ?>
@@ -79,12 +102,21 @@ if (isset($_POST['submit'])) {
                     <div class="form">
 
                         <?php
+                        if (isset($_GET['forgot_password_invalid_email'])) {
+                            echo "<div class='alert alert-danger'>Email does not exists!</div>";
+                        }
+
                         if (isset($_GET['invalid_email'])) {
                             echo "<div class='alert alert-danger'>Email does not exists!</div>";
                         }
 
                         if (isset($_GET['invalid_password'])) {
                             echo "<div class='alert alert-danger'>Password is incorrect!</div>";
+                        }
+                        ?>
+                        <?php
+                        if (isset($_GET['i'])) {
+                            echo "<input type='hidden' name='i' value='" . $_GET['i'] . "' />";
                         }
                         ?>
                         <label for="">E-mail</label><br>
@@ -142,13 +174,13 @@ if (isset($_POST['submit'])) {
     <div class="forgot-password" id="forgot-password">
         <div class="forgot-password-box">
             <h2>Forgot Password</h2>
-            <p>Enter the email address for your account, we will send a verification code to your email address</p>
+            <p>Enter the email address for your account, we will send a password reset link to your email address</p>
             <form action="" method="POST">
-                <input type="email" id="forgot_password_email" placeholder="Enter your Email Address">
+                <input type="email" name="email" id="forgot_password_email" placeholder="Enter your Email Address">
 
                 <div class="button">
                     <h3 id="forgot-password-close">Cancel</h3>
-                    <input type="submit" class="submit" id="reset-password-open" name="submit-forgot-password">
+                    <input type="submit" class="submit" id="reset-password-open" name="submit_forgot_password">
                     <!-- <span class="submit" id="reset-password-open">Submit</span> -->
                     <!-- <a href="./" id="reset-password-open">Submit</a> -->
                 </div>

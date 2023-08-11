@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 07, 2023 at 09:26 AM
+-- Generation Time: Aug 10, 2023 at 06:33 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.28
 
@@ -40,7 +40,27 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`id`, `username`, `password`, `phone`, `email`) VALUES
-(1, 'Admin', '1234', '', '');
+(1, 'Admin', '1234', '09012786344', 'support@homigon.com');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `categories`
+--
+
+CREATE TABLE `categories` (
+  `id` int(11) NOT NULL,
+  `name` varchar(500) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `categories`
+--
+
+INSERT INTO `categories` (`id`, `name`) VALUES
+(1, 'Buy'),
+(3, 'Rent'),
+(4, 'Lease');
 
 -- --------------------------------------------------------
 
@@ -76,10 +96,68 @@ CREATE TABLE `items` (
 --
 
 INSERT INTO `items` (`id`, `item_id`, `user_id`, `category`, `item_type`, `title`, `location`, `item_condition`, `nearest_bustop`, `number_of_rooms`, `amenities`, `number_of_toilets`, `price`, `number_of_bathrooms`, `additional_information`, `images`, `status`, `time`, `date`, `time_created`) VALUES
-(7, '64cead010d549', '64ccb4e83feaf', 'Rent', 'Flat', '3 Bedroom Flat', 'Eneka Road', 'Furnunised', 'Igwuruta Roundabout', '3', '[\"Good access road\",\"Security\",\"Light\"]', '4', '5000000', '3', 'None', '[\"64ceace64dfb5.png\",\"64ceacf1c224e.png\",\"64ceacfca70b4.png\"]', 'Inactive', '1691266305', '05-08-23', 'Aug,05,2023 10:11 PM'),
-(8, '64ceada67fae0', '64ccb4e83feaf', 'Buy', 'Studio Apartment', 'Music Studio Apartment', 'Lekki', 'Unfurnished', 'Olu Junction', '4', '[\"Security\",\"Light\",\"Swimming Pool\"]', '3', '3000000', '3', 'Buyers are needed urgently', '[\"64cead977bf7a.png\",\"64ceada3b18f6.png\"]', 'Inactive', '1691266470', '05-08-23', 'Aug,05,2023 10:14 PM'),
-(9, '64ceb1b972cc8', '64ccb4e83feaf', 'Lease', 'Boys Quarter', '6 Rooms Boys Qauter', 'Abuja', 'Furnunised', 'Kwala', '6', '[\"Good access road\",\"Light\"]', '5', '300000', '2', 'Empty', '[\"64ceb1b6beeec.png\"]', 'Inactive', '1691267513', '05-08-23', 'Aug,05,2023 10:31 PM'),
-(10, '64ceb27485cac', '64ccb4e83feaf', 'Rent', 'Flat', '5 Room Duplex', 'Eneka Road', 'Furnunised', 'Genesis', '5', '[\"Good access road\",\"Security\"]', '4', '5000000', '5', 'Empty', '[\"64ceb271d88ca.png\"]', 'Inactive', '1691267700', '05-08-23', 'Aug,05,2023 10:35 PM');
+(7, '64cead010d549', '64ccb4e83feaf', 'Rent', 'Studio Apartment', '3 Bedroom Flat', 'Eneka Road', 'Furnunised', 'Igwuruta Roundabout', '3', '[\"Good access road\",\"Security\",\"Light\"]', '4', '5000000', '3', 'None', '[\"64ceace64dfb5.png\",\"64ceacf1c224e.png\",\"64ceacfca70b4.png\",\"64d0a375ea52d.png\",\"64d0a37ec1d36.png\"]', 'Inactive', '1691266305', '05-08-23', 'Aug,05,2023 10:11 PM'),
+(8, '64ceada67fae0', '64ccb4e83feaf', 'Buy', 'Studio Apartment', 'Music Studio Apartment', 'Lekki', 'Unfurnished', 'Olu Junction', '4', '[\"Security\",\"Light\",\"Swimming Pool\"]', '3', '3000000', '3', 'Buyers are needed urgently', '[\"64cead977bf7a.png\",\"64ceada3b18f6.png\"]', 'Active', '1691266470', '05-08-23', 'Aug,05,2023 10:14 PM'),
+(10, '64ceb27485cac', '64ccb4e83feaf', 'Rent', 'Flat', '5 Room Duplex', 'Eneka Road', 'Furnunised', 'Genesis', '5', '[\"Good access road\",\"Security\"]', '4', '5000000', '5', 'Empty', '[\"64ceb271d88ca.png\"]', 'Active', '1691267700', '05-08-23', 'Aug,05,2023 10:35 PM');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `password_recovery_keys`
+--
+
+CREATE TABLE `password_recovery_keys` (
+  `id` int(11) NOT NULL,
+  `user_id` varchar(500) NOT NULL,
+  `key_id` varchar(500) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `password_recovery_keys`
+--
+
+INSERT INTO `password_recovery_keys` (`id`, `user_id`, `key_id`) VALUES
+(1, '64ccb4e83feaf', '64d50f2ecd843');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `saved_items`
+--
+
+CREATE TABLE `saved_items` (
+  `id` int(11) NOT NULL,
+  `item_id` varchar(500) NOT NULL,
+  `user_id` varchar(500) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `saved_items`
+--
+
+INSERT INTO `saved_items` (`id`, `item_id`, `user_id`) VALUES
+(9, '64cead010d549', '64ccb536adbf6'),
+(15, '64ceada67fae0', '64ccb4e83feaf');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `types`
+--
+
+CREATE TABLE `types` (
+  `id` int(11) NOT NULL,
+  `name` varchar(500) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `types`
+--
+
+INSERT INTO `types` (`id`, `name`) VALUES
+(1, 'Flat'),
+(3, 'Studio Apartment'),
+(4, 'Boys Quarter');
 
 -- --------------------------------------------------------
 
@@ -99,6 +177,7 @@ CREATE TABLE `users` (
   `image` varchar(500) NOT NULL,
   `is_owner_or_agent` varchar(500) NOT NULL,
   `status` varchar(500) NOT NULL,
+  `verification_status` varchar(500) NOT NULL,
   `time` varchar(500) NOT NULL,
   `date` varchar(500) NOT NULL,
   `time_created` varchar(500) NOT NULL
@@ -108,9 +187,44 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `user_id`, `user_type`, `firstname`, `lastname`, `email`, `phone`, `password`, `image`, `is_owner_or_agent`, `status`, `time`, `date`, `time_created`) VALUES
-(5, '64ccb4e83feaf', 'Agent', 'John', 'Doe', 'john@gmail.com', '08023782363', '$2y$10$lnYyiTVdQngDWmFqPThWw.fGt162Vg/VHmwcGR8CaSVWezhLHM0uW', 'default.svg', 'Owner', 'Active', '1691137256', '04-08-23', 'Aug,04,2023 10:20 AM'),
-(6, '64ccb536adbf6', 'Individual', 'Mary', 'Lanes', 'mary@gmail.com', '12612561233', '$2y$10$MlkYyue/N3i7bPjJF8hATe32yacV2xvEHfJhuDOsSbfYp/eRSkJxe', 'default.svg', 'Empty', 'Active', '1691137334', '04-08-23', 'Aug,04,2023 10:22 AM');
+INSERT INTO `users` (`id`, `user_id`, `user_type`, `firstname`, `lastname`, `email`, `phone`, `password`, `image`, `is_owner_or_agent`, `status`, `verification_status`, `time`, `date`, `time_created`) VALUES
+(5, '64ccb4e83feaf', 'Agent', 'John', 'Doe', 'john@gmail.com', '08023782363', '$2y$10$jZcdz.Pam/4PzsvB6EnYXuXsOYTbNLI9jpcZL.HwzTR/HEOZ.P75i', 'default.svg', 'Owner', 'Active', 'Verified', '1691137256', '04-08-23', 'Aug,04,2023 10:20 AM');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `verifications`
+--
+
+CREATE TABLE `verifications` (
+  `id` int(11) NOT NULL,
+  `verification_id` varchar(50) NOT NULL,
+  `user_id` varchar(50) NOT NULL,
+  `firstname` varchar(500) NOT NULL,
+  `lastname` varchar(500) NOT NULL,
+  `gender` varchar(10) NOT NULL,
+  `date_of_birth` varchar(50) NOT NULL,
+  `phone` varchar(20) NOT NULL,
+  `email` varchar(500) NOT NULL,
+  `country` varchar(50) NOT NULL,
+  `state` varchar(50) NOT NULL,
+  `lga` varchar(500) NOT NULL,
+  `residential_area` varchar(500) NOT NULL,
+  `means_of_identification` varchar(500) NOT NULL,
+  `identification_number` varchar(500) NOT NULL,
+  `images` varchar(500) NOT NULL,
+  `status` varchar(500) NOT NULL,
+  `time` varchar(50) NOT NULL,
+  `date` varchar(50) NOT NULL,
+  `time_created` varchar(500) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `verifications`
+--
+
+INSERT INTO `verifications` (`id`, `verification_id`, `user_id`, `firstname`, `lastname`, `gender`, `date_of_birth`, `phone`, `email`, `country`, `state`, `lga`, `residential_area`, `means_of_identification`, `identification_number`, `images`, `status`, `time`, `date`, `time_created`) VALUES
+(3, '64d4815a02112', '64ccb4e83feaf', 'John', 'Doe', 'male', '10_August_1973', '08023782363', 'john@gmail.com', 'Nigeria', 'Cross River', 'Cross', 'GRA', 'National Identification Card', '83474364343', '[\"64d4814bbfd6c.png\",\"64d48154d874f.png\"]', 'Verified', '1691648346', '10-08-23', 'Aug,10,2023 08:19 AM');
 
 --
 -- Indexes for dumped tables
@@ -123,15 +237,45 @@ ALTER TABLE `admin`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `categories`
+--
+ALTER TABLE `categories`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `items`
 --
 ALTER TABLE `items`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `password_recovery_keys`
+--
+ALTER TABLE `password_recovery_keys`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `saved_items`
+--
+ALTER TABLE `saved_items`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `types`
+--
+ALTER TABLE `types`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `verifications`
+--
+ALTER TABLE `verifications`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -145,16 +289,46 @@ ALTER TABLE `admin`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `categories`
+--
+ALTER TABLE `categories`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
+-- AUTO_INCREMENT for table `password_recovery_keys`
+--
+ALTER TABLE `password_recovery_keys`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `saved_items`
+--
+ALTER TABLE `saved_items`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `types`
+--
+ALTER TABLE `types`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `verifications`
+--
+ALTER TABLE `verifications`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

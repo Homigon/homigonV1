@@ -1,16 +1,17 @@
-.sign-up{
+.sign-up {
     width: 100%;
     margin-bottom: 104px;
 }
 
-h3{
+h3 {
     color: #fff;
     text-align: center;
     font-size: 24px;
     font-weight: 700;
     line-height: 30px;
 }
-.sign-up .header{
+
+.sign-up .header {
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-around;
@@ -18,23 +19,20 @@ h3{
     height: 200px;
     width: 100%;
     /* z-index: 1000; */
-    
-
 }
 
-.hide{
+.hide {
     display: none;
     margin-top: 20px;
 }
 
-.sign-up .header h3{
+.sign-up .header h3 {
     font-size: 1.5rem;
     font-weight: 600;
     margin-top: 70px;
-
 }
 
-.sign-up .body{
+.sign-up .body {
     margin-top: -20px;
     padding: 0px 75px;
     display: flex;
@@ -43,44 +41,41 @@ h3{
     width: 100%;
 }
 
-.sign-up .body .login{
+.sign-up .body .login {
     width: 40%;
-
 }
 
-
-
-.sign-up .body .form{
+.sign-up .body .form {
     font-style: normal;
     font-weight: 700;
     font-size: 18px;
     line-height: 22px;
     width: 100%;
-    
 }
 
-.sign-up .body .form label{
-        margin: 50px 0px -20px 0px;
-    
+.sign-up .body .form label {
+    margin: 50px 0px -20px 0px;
 }
-.sign-up .body .form .password{
+
+.sign-up .body .form .password {
     margin-top: 20px;
 }
 
-.sign-up .body .form input{
+.sign-up .body .form input {
     width: 100%;
     border: none;
     border-bottom: solid 1px #333;
     margin: 10px 0px;
 }
 
-.sign-up .body .form input:focus{
+.sign-up .body .form input:focus {
     outline: none;
 }
-.sign-up .body .form h3{
+
+.sign-up .body .form h3 {
     margin-top: 20px;
-    float: right; 
-    color: #ffc700; 
+    float: right;
+    color: #ffc700;
     cursor: pointer;
 }
 
@@ -91,26 +86,25 @@ h3{
     position: relative;
     z-index: 2;
     cursor: pointer;
-    
 }
 
-.field-icon:hover{
+.field-icon:hover {
     background: #fff;
     color: #333;
 }
 
-#password-icon-close{
+#password-icon-close {
     display: none;
 }
 
-.sign-up .body .form .checkbox{
+.sign-up .body .form .checkbox {
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
     margin: 40px 0px;
 }
 
-.sign-up .body .form .login-button .login-btn{
+.sign-up .body .form .login-button .login-btn {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -121,33 +115,28 @@ h3{
     margin-top: 20px;
     border-radius: 10px;
     cursor: pointer;
-    width:100%;
-    border:none;
+    width: 100%;
+    border: none;
 }
 
-.sign-up .body .create-an-account .logo img{
+.sign-up .body .create-an-account .logo img {
     width: 100%;
     margin-top: 50px;
-
 }
 
-.sign-up .body .create-an-account .description{
+.sign-up .body .create-an-account .description {
     text-align: center;
 }
 
-
-
-.sign-up .body .create-an-account{
+.sign-up .body .create-an-account {
     width: 40%;
     display: flex;
     flex-flow: column;
     justify-content: center;
     /* margin-top: 70px; */
-    
 }
 
-
-.sign-up .body .create-an-account .login-button .login-btn{
+.sign-up .body .create-an-account .login-button .login-btn {
     display: flex;
     flex-flow: row;
     justify-content: center;
@@ -166,10 +155,12 @@ h3{
 }
 
 
+/* forgot password */
+
 
 /* forgot password */
-/* forgot password */
-.forgot-password{
+
+.forgot-password {
     display: none;
     position: fixed;
     top: 0px;
@@ -180,7 +171,7 @@ h3{
     z-index: 2000;
 }
 
-.forgot-password-box{
+.forgot-password-box {
     background: #EFFAF8;
     width: 500px;
     height: 370px;
@@ -193,17 +184,17 @@ h3{
     border-radius: 10px;
 }
 
-.forgot-password h2{
+.forgot-password h2 {
     /* margin-top: 25px; */
     text-align: justify;
 }
 
-.forgot-password p{
+.forgot-password p {
     text-align: center;
     margin-top: 15px;
 }
 
-.forgot-password input{
+.forgot-password input {
     margin-top: 25px;
     width: 400px;
     height: 70px;
@@ -212,22 +203,21 @@ h3{
     border-radius: 10px;
 }
 
-.forgot-password .button{
+.forgot-password .button {
     width: 100%;
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-around;
     margin-top: 35px;
-
 }
 
-.forgot-password h3{
+.forgot-password h3 {
     color: #FFC700;
     margin-top: 20px;
     cursor: pointer;
 }
 
-.forgot-password .submit{
+.forgot-password .submit {
     margin-top: 8px;
     margin-left: 70px;
     padding: 0px 90px;
@@ -243,10 +233,9 @@ h3{
 }
 
 
-
 /* reset password */
 
-.reset-password{
+.reset-password {
     display: none;
     position: fixed;
     top: 0px;
@@ -257,7 +246,7 @@ h3{
     z-index: 2000;
 }
 
-.reset-password .reset-password-box{
+.reset-password .reset-password-box {
     width: 400px;
     /* height: 550px; */
     display: flex;
@@ -271,27 +260,27 @@ h3{
     border-radius: 5px;
 }
 
-.reset-password h2{
+.reset-password h2 {
     width: 100%;
     text-align: center;
     margin-top: 10px;
-    
 }
 
-.reset-password img{
+.reset-password img {
     margin-top: 25px;
 }
 
-.reset-password .reset-password-box p{
+.reset-password .reset-password-box p {
     font-size: small;
     margin-top: 25px;
     text-align: center;
 }
 
-.reset-password .reset-password-box form{
+.reset-password .reset-password-box form {
     width: 100%;
 }
-.reset-password .verification-code{
+
+.reset-password .verification-code {
     display: flex;
     flex-flow: row;
     justify-content: space-between;
@@ -299,17 +288,16 @@ h3{
     width: 100%;
 }
 
-.reset-password .verification-code input{
+.reset-password .verification-code input {
     width: 50px;
     height: 70px;
     padding: 15px;
     font-size: 1.5rem;
     border: 2px solid #33CCA8;
     border-radius: 10px;
-
 }
 
-.reset-password button{
+.reset-password button {
     margin-top: 50px;
     height: 55px;
     float: right;
@@ -323,19 +311,21 @@ h3{
     position: relative;
 }
 
-.reset-password .reset-password-box .resend-div{
+.reset-password .reset-password-box .resend-div {
     align-self: flex-end;
 }
-.reset-password .reset-password-box .resend-div a{
+
+.reset-password .reset-password-box .resend-div a {
     text-decoration: none;
     color: #FFC700;
     font-size: 1rem;
     font-weight: 600;
 }
 
+
 /* new password */
 
-.new-password{
+.new-password {
     display: none;
     position: fixed;
     top: 0px;
@@ -346,30 +336,31 @@ h3{
     z-index: 2000;
 }
 
-.new-password-box{
+.new-password-box {
     background: #EFFAF8;
     width: 500px;
-    height: 500px;
+    /* height: 500px; */
     display: flex;
     flex-flow: column;
     /* justify-content: center; */
     align-items: center;
     margin: 3rem auto;
-    padding: 1.5rem 1.5rem 0rem 2rem;
+    padding: 1.5rem 1.5rem 1.5rem 2rem;
     border-radius: 10px;
+    margin-bottom: 30px;
 }
 
-.new-password h2{
+.new-password h2 {
     margin-top: 25px;
     text-align: center;
 }
 
-.new-password p{
+.new-password p {
     text-align: center;
     margin-top: 15px;
 }
 
-.new-password form{
+.new-password form {
     display: flex;
     width: 100%;
     flex-flow: column;
@@ -377,7 +368,7 @@ h3{
     align-items: center;
 }
 
-.new-password input{
+.new-password input {
     margin-top: 25px;
     width: 400px;
     height: 70px;
@@ -386,22 +377,21 @@ h3{
     border-radius: 10px;
 }
 
-.new-password .button{
+.new-password .button {
     width: 100%;
     display: flex;
     flex-flow: row;
     justify-content: space-around;
     margin-top: 35px;
-
 }
 
-.new-password h3{
+.new-password h3 {
     color: #FFC700;
     margin-top: 20px;
     cursor: pointer;
 }
 
-.new-password .submit{
+.new-password .submit {
     margin-top: 8px;
     width: 250px;
     border: none;
@@ -410,133 +400,104 @@ h3{
     border-radius: 10px;
 }
 
-@media only screen and (max-width: 991px){
-    
-    .remove{
+@media only screen and (max-width: 991px) {
+    .remove {
         display: none;
     }
-
-    .hide{
+    .hide {
         display: block;
         width: 100%;
         text-align: center;
         margin: 30px 0;
     }
-
-    .sign-up .body .create-an-account .logo img{
+    .sign-up .body .create-an-account .logo img {
         display: none;
     }
-
-
-    .sign-up .header{
+    .sign-up .header {
         display: flex;
         justify-content: flex-end;
         flex-direction: column-reverse;
     }
-
-    .sign-up .body{
+    .sign-up .body {
         padding: 0px 30px;
         display: flex;
         justify-content: center;
         flex-flow: column;
     }
-    
-    .sign-up .body .login{
+    .sign-up .body .login {
         /* display: flex; */
         justify-content: center;
         width: 100%;
     }
-    .sign-up .body .form{
+    .sign-up .body .form {
         margin-top: 0;
     }
-    .sign-up .body .form .login-button{
+    .sign-up .body .form .login-button {
         width: 100%;
     }
-
-    .sign-up .body .create-an-account{
+    .sign-up .body .create-an-account {
         width: 100%;
         display: flex;
         flex-flow: row wrap;
         justify-content: center;
     }
-
-    .sign-up .body .create-an-account .login-button{
+    .sign-up .body .create-an-account .login-button {
         width: 100%;
         margin-top: -12px;
     }
-    .sign-up .body .create-an-account .login-button .login-btn{
+    .sign-up .body .create-an-account .login-button .login-btn {
         margin-top: 0;
     }
-
 }
 
-@media only screen and (max-width: 512px){
-
-    .forgot-password-box{
+@media only screen and (max-width: 512px) {
+    .forgot-password-box {
         width: 300px;
         height: 350px;
         padding: 1.3rem;
     }
-
-    .forgot-password p{
+    .forgot-password p {
         font-size: 14px;
     }
-   
-    .forgot-password-box form{
-        
+    .forgot-password-box form {
         width: 100%;
-        
-        
     }
-
-
-    .forgot-password input{
+    .forgot-password input {
         width: 100%;
         height: 50px;
     }
-
-    .forgot-password .button{
+    .forgot-password .button {
         /* flex-flow: column; */
         justify-content: center;
     }
-
-    .forgot-password h3{
+    .forgot-password h3 {
         font-size: 1rem;
     }
-
-    .forgot-password .button .submit{
+    .forgot-password .button .submit {
         width: 150px;
         height: 45px;
         margin-left: 20px;
         padding: 0;
-
     }
-
     /* reset password */
-
-    .reset-password .reset-password-box{
+    .reset-password .reset-password-box {
         width: 300px;
     }
-    .reset-password button{
+    .reset-password button {
         margin-top: 20px;
         width: 150px;
         height: 45px;
         border-radius: 10px;
         justify-content: space-between;
     }
-
-    .new-password-box{
+    .new-password-box {
         width: 300px;
     }
-
-    .new-password-box input{
+    .new-password-box input {
         width: 100%;
         height: 50px;
     }
-
-    .new-password .submit{
+    .new-password .submit {
         width: 150px;
     }
-
-
 }

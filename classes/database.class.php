@@ -84,7 +84,7 @@ class Database
     // public function sendInfo($to, $subject, $message)
     // {
 
-    //     $header = "From: Daily Global Trades support@homigon.ng \r\n";
+    //     $header = "From: Homigon support@homigon.ng \r\n";
     //     $header .= "Cc:support@homigon.ng \r\n";
     //     $header .= "MIME-Version: 1.0\r\n";
     //     $header .= "Content-type: text/html\r\n";
@@ -116,7 +116,7 @@ class Database
         $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
         //Recipients
-        $mail->setFrom('support@homigon.ng', 'Daily Global Trades');
+        $mail->setFrom('support@homigon.ng', 'Homigon');
         // $mail->addAddress('joe@example.net', 'Joe User');     //Add a recipient
         $mail->addAddress($to);               //Name is optional
         $mail->addReplyTo('support@homigon.ng', 'support');

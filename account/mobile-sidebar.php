@@ -33,7 +33,7 @@
         }
         ?>
 
-      <a href="houses" style="color:#ffffff ;">
+      <a href="saved-items" style="color:#ffffff ;">
           <div class="menu">
               <img src="../images/Vector (8).png" alt="">
               <p>Saved Houses</p>

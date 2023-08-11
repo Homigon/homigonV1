@@ -13,10 +13,20 @@
             </div>
             <div class="footer-link">
                 <div>
-                    <p><a href="product">Rent</a></p>
-                    <p><a href="list-a-house">List</a></p>
-                    <p><a href="product">Buy</a></p>
-                    <p><a href="product">Lease</a></p>
+                    <p><a href="sign-in?redirect=list-a-house">List</a></p>
+                    <?php
+                    $categories = $admin->getCategories();
+                    $x = 0;
+                    foreach ($categories as $category) {
+                        if ($x < 3) {
+                            echo "<p><a href='product?category[]=$category'>$category</a></p>";
+                        }
+                        $x++;
+                    }
+                    ?>
+                    <!-- <p><a href="product?category[]=Rent">Rent</a></p>
+                    <p><a href="product?category[]=Rent">Buy</a></p>
+                    <p><a href="product?category[]=Lease">Lease</a></p> -->
                 </div>
             </div>
             <div class="footer-link">

@@ -5,9 +5,9 @@ class Admin
 
     public $admin_id = 1;
 
-    public $website_name = "Daily Global Trades";
-    public $website_url = "https://daily-gt.com";
-    public $website_url_e = "daily-gt.com";
+    public $website_name = "Homigon";
+    public $website_url = "https://homigon.com";
+    public $website_url_e = "homigon.com";
 
     public $wallet_core_private = "";
     public $wallet_core_public = "";
@@ -116,38 +116,6 @@ class Admin
 
 
 
-    public function calculateCoinPrice($coin, $usd_cost)
-    {
-        $url = "https://coinlib.io/api/v1/coin?key=e7f76466ade5d7bb&symbol=$coin";
-        $stats = json_decode(file_get_contents($url), true);
-
-        //$usdCost = 500;
-        $coin_price = $stats['price'];
-
-        $convertedCost = $usd_cost / $coin_price;
-
-        return number_format($convertedCost, 8);
-        // return $coin_price;
-    }
-
-    public function generateCoinAddress($coin)
-    {
-
-
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, "http://localhost/royaltradescenter/walletcore/create_new_address.php?coin=$coin");
-        // curl_setopt($ch, CURLOPT_URL, "https://royaltradescenter.com/walletcore/create_new_address.php");
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        $generate_address = curl_exec($ch);
-        curl_close($ch);
-        $generate_address = (array) json_decode($generate_address);
-        // print_r($generate_address);
-        if ($generate_address['status'] == "200") {
-            return $generate_address['address'];
-        } else {
-            return "failed";
-        }
-    }
 
     public function getRecaptchaCodes()
     {
@@ -162,11 +130,6 @@ class Admin
         return $code;
         // $rand = RAND(0, count($numbers));
         // return $rand;
-    }
-
-    public function getCoinAddress($coin)
-    {
-        return $this->getDetail($this->admin_id, $coin . "_wallet");
     }
 
 
@@ -184,37 +147,8 @@ class Admin
         }
     }
 
-    public function getTotalDeposits()
-    {
-        global $db;
 
-        $total = 0;
-        $result = $db->setQuery("SELECT * FROM users;");
-        $numrows = mysqli_num_rows($result);
-        if ($numrows != 0) {
-            while ($row = mysqli_fetch_assoc($result)) {
-                $total += $row['total_deposit'];
-            }
-        }
 
-        return $total;
-    }
-
-    public function getTotalWithdrawals()
-    {
-        global $db;
-
-        $total = 0;
-        $result = $db->setQuery("SELECT * FROM users;");
-        $numrows = mysqli_num_rows($result);
-        if ($numrows != 0) {
-            while ($row = mysqli_fetch_assoc($result)) {
-                $total += $row['total_withdrawal'];
-            }
-        }
-
-        return $total;
-    }
 
     public function formatWhatsappPhone($phone)
     {
@@ -228,6 +162,40 @@ class Admin
         }
 
         return $number;
+    }
+
+    public function getCategories()
+    {
+        global $db;
+
+        $array = [];
+        $result = $db->setQuery("SELECT * FROM categories;");
+        $numrows = mysqli_num_rows($result);
+
+        if ($numrows != 0) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                $array[count($array)] = $row['name'];
+            }
+        }
+
+        return $array;
+    }
+
+    public function getTypes()
+    {
+        global $db;
+
+        $array = [];
+        $result = $db->setQuery("SELECT * FROM types;");
+        $numrows = mysqli_num_rows($result);
+
+        if ($numrows != 0) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                $array[count($array)] = $row['name'];
+            }
+        }
+
+        return $array;
     }
 }
 

@@ -8,21 +8,33 @@
                 <a href="list-a-house">
                     <li>List a House</li>
                 </a>
-                <a href="product">
+                <a href="product-listing?category[]=Rent">
                     <li>Rent</li>
                 </a>
-                <a href="product">
+                <a href="product-listing?category[]=Buy">
                     <li>Buy</li>
                 </a>
-                <li id="none"><a href="./"><i class="fa-regular fa-user" style="color: #fff;"></i>Account</a>
-                    <ul>
-                        <a href="sign-in">
-                            <li>Sign-In</li>
-                        </a>
-                        <a href="create-account">
-                            <li>Sign-Up</li>
-                        </a>
-                    </ul>
+                <li id="none">
+                    <?php
+                    if (isset($_SESSION['user_id'])) {
+                    ?>
+                        <a href="account"><i class="fa-regular fa-user" style="color: #fff;"></i>My Account</a>
+                    <?php
+                    } else {
+                    ?>
+                        <a style="cursor:pointer;"><i class="fa-regular fa-user" style="color: #fff;"></i>Account</a>
+                        <ul>
+                            <a href="sign-in">
+                                <li>Sign-In</li>
+                            </a>
+                            <a href="create-account">
+                                <li>Sign-Up</li>
+                            </a>
+                        </ul>
+                    <?php
+                    }
+                    ?>
+
                 </li>
                 <a href="faq">
                     <li><i class="fa-regular fa-circle-question"></i>Help</li>

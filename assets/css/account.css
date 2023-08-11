@@ -515,7 +515,8 @@ form .save button {
     border: 2px solid #33cca8;
     border-radius: 4px;
     background-color: #e6f0ee;
-    width: 27%;
+    /* width: 27%; */
+    width: 95%;
     height: 55px;
 }
 
@@ -1290,22 +1291,41 @@ form .last .save button {
 /* image preview */
 
 .image-preview {
-    width: 6rem;
-    min-height: 50px;
+    /* width: 6rem; */
+    width: 150px;
+    /* min-height: 50px; */
+    height: 150px;
     border: 2px solid #dddddd;
     margin-top: 15px;
-    /* default text */
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: bold;
     color: #cccccc;
     font-size: 11px;
+    position: relative;
 }
 
 .image-preview__image {
-    width: 100%;
-    display: none;
+    width: 100% !important;
+    object-fit: contain;
+}
+
+.image-preview .delete-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+    font-size: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    z-index: 10;
 }
 
 label {

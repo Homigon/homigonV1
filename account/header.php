@@ -4,11 +4,12 @@
     <ul id="link">
         <img src="../images/close-x.png" alt="" id="closeicon">
         <li><a href="list-a-house">List A House</a></li>
-        <li><a href="../product-listing">Rent</a></li>
-        <li><a href="../product-listing">Buy</a></li>
-        <li class="i" id="account"><a href="./">
+        <!-- <li><a href="../product-listing">Rent</a></li>
+        <li><a href="../product-listing">Buy</a></li> -->
+        <li class="i" id="account">
+            <a href="logout">
                 <img src="../images/user.png" alt="" style="height:1.2rem ; padding-right:.3rem;">
-                <p> Account</p>
+                <p> Logout?</p>
             </a>
         </li>
         <li class="i"><a href="../faq">

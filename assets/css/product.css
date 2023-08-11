@@ -198,6 +198,7 @@ form .input-search button {
 
 .listed .img-container .img-box {
     margin-top: 30px;
+    margin-right: 15px;
 }
 
 .listed .img-container .img-box img {
@@ -300,6 +301,13 @@ form .input-search button {
     padding: 0px 20px 0px 0px;
 }
 
+.listed .descriptions #amenities .small.amenity {
+    border: 2px solid #33CCA8;
+    border-radius: 10px;
+    padding: 3px 10px;
+    margin-right: 5px;
+}
+
 .call-agent {
     width: 70%;
     display: flex;
@@ -325,11 +333,13 @@ form .input-search button {
     border: 2px solid #FFC700;
     color: #333;
     margin-top: 20px;
+    cursor: pointer;
 }
 
 .call-agent .button a {
     text-decoration: none;
     color: #fff;
+    cursor: pointer;
 }
 
 .save-for-later {
@@ -338,6 +348,11 @@ form .input-search button {
     justify-content: right;
     margin-top: 20px;
     /* padding: 0 50px; */
+    cursor: pointer;
+}
+
+.save-for-later .green {
+    color: #33CCA8 !important;
 }
 
 .save-for-later p {

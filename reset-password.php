@@ -5,24 +5,32 @@ include 'classes/database.class.php';
 include 'classes/admin.class.php';
 include 'classes/users.class.php';
 
-if (isset($_POST['submit'])) {
+if (!isset($_GET['key_id'])) {
+    $admin->goTo("sign-in", "invalid_password_reset");
+}
 
-    $email = mysqli_real_escape_string($db->conn, $_POST['email']);
-    $password = mysqli_real_escape_string($db->conn, $_POST['password']);
+$key_id = mysqli_real_escape_string($db->conn, $_GET['key_id']);
 
-    $result = $db->setQuery("SELECT * FROM users WHERE email='$email';");
-    $numrows = mysqli_num_rows($result);
+if (!$admin->passwordRecoveryKeyIsValid($key_id)) {
+    $admin->goTo("sign-in", "invalid_password_reset");
+}
 
-    if ($numrows > 0) {
+if (isset($_GET['submit'])) {
+    $password = mysqli_real_escape_string($db->conn, $_GET['password']);
+    $confirm_password = mysqli_real_escape_string($db->conn, $_GET['confirm_password']);
+
+    if ($password == $confirm_password) {
+
+        $result = $db->setQuery("SELECT * FROM password_recovery_keys WHERE key_id='$key_id';");
         $row = mysqli_fetch_assoc($result);
-        if (password_verify($password, $row['password'])) {
-            $_SESSION['user_id'] = $row['user_id'];
-            $admin->goTo("account", "login_success");
-        } else {
-            $admin->goTo("sign-in", "invalid_password");
-        }
+        $user_id = $row['user_id'];
+
+        $hashed = password_hash($password, PASSWORD_DEFAULT);
+        $user->setDetail($user_id, "password", $hashed);
+
+        $admin->goTo("sign-in", "password_changed");
     } else {
-        $admin->goTo("sign-in", "invalid_email");
+        $admin->goTo("reset-password", "invalid_passwords&key_id=$key_id");
     }
 }
 ?>
@@ -58,13 +66,19 @@ if (isset($_POST['submit'])) {
     <div class="new-password" id="new-password" style="display:block;">
         <div class="new-password-box">
             <h2>Reset Password</h2>
-            <p>Enter the email address for your account, we will send a verification code to your email address</p>
-            <form action="" method="">
-                <input type="password" placeholder="Enter New Password">
-                <input type="password" placeholder="Confirm Password">
+            <!-- <p>Enter the email address for your account, we will send a verification code to your email address</p> -->
+            <form action="" method="GET">
+                <?php
+                if (isset($_GET['invalid_passwords'])) {
+                    echo "<div class='alert alert-danger'>Passwords do not match!</div>";
+                }
+                ?>
+                <input type="hidden" name="key_id" value="<?php echo $key_id; ?>">
+                <input type="password" name="password" placeholder="Enter New Password">
+                <input type="password" name="confirm_password" placeholder="Confirm Password">
                 <div class="button">
-                    <h3 id="new-password-close">Cancel</h3>
-                    <button type="submit" class="submit" id="new-password">Submit</button>
+                    <!-- <h3 id="new-password-close">Cancel</h3> -->
+                    <button type="submit" class="submit" id="new-password" name="submit" style="padding:15px;"> Submit</button>
                     <!-- <a href="./" id="reset-password-open">Submit</a> -->
                 </div>
             </form>

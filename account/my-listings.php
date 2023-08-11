@@ -49,6 +49,11 @@ if (isset($_GET['delete_item'])) {
 
         </div>
 
+        <div class="dashboards">
+            <img src="../images/Vector (23).png" alt="" id="dashb">
+            <img src="../images/Vector (24).png" alt="" id="dashc">
+        </div>
+
         <div class="profile">
             <?php include 'mobile-sidebar.php'; ?>
 
@@ -86,7 +91,7 @@ if (isset($_GET['delete_item'])) {
                                     <div class="cnt">
                                         <div class="left">
 
-                                            <a href="./"><img src="../item-images/<?php echo $images[0]; ?>" alt=""></a>
+                                            <a href="../product?i=<?php echo $row['item_id']; ?>"><img src="../item-images/<?php echo $images[0]; ?>" alt=""></a>
 
                                         </div>
                                         <div class="right">
@@ -98,7 +103,7 @@ if (isset($_GET['delete_item'])) {
                                             <div class="frst">
                                                 <div class="icon">
                                                     <a href="./"><img src="../images/Group 191.png" alt=""></a>
-                                                    <p> 2</p>
+                                                    <p> <?php echo $row['number_of_rooms']; ?></p>
                                                 </div>
                                                 <div class="icon">
                                                     <a href="./"><img src="../images/Group 192.png" alt=""></a>

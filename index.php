@@ -58,15 +58,15 @@ include 'classes/items.class.php';
                 <p>Buy or rent your home at the best price</p>
             </div>
 
-            <form action="#" method="get">
+            <form action="product-listing" method="GET">
 
                 <div class="buy-rent-lease">
 
-                    <input type="radio" name="category" value="buy" id="radio1">
+                    <input type="radio" name="category[]" value="Buy" id="radio1">
                     <label for="radio1" class="radio-btn">Buy</label>
-                    <input type="radio" name="category" value="rent" id="radio2">
+                    <input type="radio" name="category[]" value="Rent" id="radio2">
                     <label for="radio2" class="radio-btn">Rent</label>
-                    <input type="radio" name="category" value="lease" id="radio3">
+                    <input type="radio" name="category[]" value="Lease" id="radio3">
                     <label for="radio3" class="radio-btn">Lease</label>
                     <!-- <button class="buy hero-btn" onclick="changeColor(this)">Buy</button>
                 <button class="rent hero-btn" onclick="changeColor(this)">Rent</button>
@@ -74,41 +74,46 @@ include 'classes/items.class.php';
                 </div>
 
                 <div class="searchbar">
-                    <input type="search" placeholder="Enter a location, local goverment or street">
+                    <input type="search" name="query" placeholder="Enter a location, local goverment or street">
                 </div>
 
                 <div class="dropdown">
                     <div class="dropdown-options">
 
                         <div class="options">
-                            <select name="all-types" id="all-types">
-                                <option value="All types">All Types</option>
-                                <option value="flat">Flat</option>
-                                <option value="studio-apartment">Studio-Apartment</option>
-                                <option value="boys-quarters">Boys Quarters</option>
+                            <select name="type[]" id="all-types">
+                                <option value="">All Types</option>
+                                <?php
+                                $types = $admin->getTypes();
+                                foreach ($types as $type) {
+                                    echo "<option>$type</option>";
+                                }
+                                ?>
+
                             </select>
                         </div>
 
                         <div class="options">
                             <select name="bedrooms" id="bedrooms">
-                                <option value="bedrooms">Bedrooms</option>
-                                <option value="1 bedroom">1 bedroom</option>
-                                <option value="2 bedroom">2 bedrooms</option>
-                                <option value="3 bedroom">3 bedrooms</option>
-                                <option value="4 bedroom">4 bedrooms and above</option>
+                                <option value="">All Bedrooms</option>
+                                <?php
+                                for ($i = 0; $i < 100; $i++) {
+                                    echo "<option>$i</option>";
+                                }
+                                ?>
                             </select>
                         </div>
 
 
                         <div class="options">
-                            <select name="price-range" id="price-range">
-                                <option value="Price Range">Price Range</option>
-                                <option value="70000">&#8358; 70,000 - &#8358; 100,000</option>
-                                <option value="70000">&#8358; 100,000 - &#8358; 150,000 </option>
-                                <option value="70000">&#8358; 150,000 - &#8358; 200,000</option>
-                                <option value="70000">&#8358; 200,000 - &#8358; 500,000</option>
-                                <option value="500,000">&#8358; 500,000 - &#8358; 1 million</option>
-                                <option value="1million">1 million and above</option>
+                            <select name="price_range" id="price-range">
+                                <option value="">All Prices</option>
+                                <option value="70000-100000">&#8358; 70,000 - &#8358; 100,000</option>
+                                <option value="100000-150000">&#8358; 100,000 - &#8358; 150,000 </option>
+                                <option value="150000-200000">&#8358; 150,000 - &#8358; 200,000</option>
+                                <option value="200000-500000">&#8358; 200,000 - &#8358; 500,000</option>
+                                <option value="500000-1000000">&#8358; 500,000 - &#8358; 1 million</option>
+                                <option value="1000000-1000000000">1 million and above</option>
                             </select>
                         </div>
 
@@ -227,7 +232,7 @@ include 'classes/items.class.php';
         </div>
 
         <!-- see more -->
-        <p><a href="featured-product">See More<i class="fa fa-angle-double-right"></i></a></p>
+        <!-- <p><a href="featured-product">See More<i class="fa fa-angle-double-right"></i></a></p> -->
 
     </div>
 
@@ -266,24 +271,24 @@ include 'classes/items.class.php';
     <div class="location">
         <p>Featured Locations</p>
         <div class="locations">
-            <div class="img">
+            <a href="product-listing?location=Rumoula" class="img">
                 <p>Rumoula</p>
                 <img src="assets/img/Group 3.png" alt="" data-aos="flip-left" data-aos-easing="ease-out-cubic" data-aos-duration="2000">
-            </div>
-            <div class="img">
+            </a>
+            <a href="product-listing?location=Old GRA" class="img">
                 <p>Old GRA</p>
                 <img src="assets/img/Group 452.png" alt="" data-aos="flip-left" data-aos-easing="ease-out-cubic" data-aos-duration="2000">
-            </div>
-            <div class="img">
+            </a>
+            <a href="product-listing?location=Port-Harcourt Township" class="img">
                 <img src="assets/img/image 4 (2).png" alt="" data-aos="flip-left" data-aos-easing="ease-out-cubic" data-aos-duration="2000">
                 <div class="img-text">
                     <p>Port-Harcourt <br />Township</p>
                 </div>
-            </div>
-            <div class="img">
+            </a>
+            <a href="product-listing?location=Eneka" class="img">
                 <p>Eneka</p>
                 <img src="assets/img/Group 453.png" alt="" data-aos="flip-left" data-aos-easing="ease-out-cubic" data-aos-duration="2000">
-            </div>
+            </a>
         </div>
     </div>
 

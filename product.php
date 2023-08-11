@@ -6,6 +6,9 @@ include 'classes/admin.class.php';
 include 'classes/users.class.php';
 include 'classes/items.class.php';
 
+if (isset($_SESSION['user_id'])) {
+    $session_id = $_SESSION['user_id'];
+}
 if (!isset($_GET['i'])) {
     $admin->goTo("./", "invalid_item");
 }
@@ -16,6 +19,21 @@ if (!$item->itemIdExists($item_id)) {
 }
 
 $user_id = $item->getDetail($item_id, "user_id");
+
+
+
+
+if (isset($_GET['send_message'])) {
+    $name = mysqli_real_escape_string($db->conn, $_GET['name']);
+    $email = mysqli_real_escape_string($db->conn, $_GET['email']);
+    $message = mysqli_real_escape_string($db->conn, $_GET['message']);
+
+    $msg = "<b>Name: </b>$name <br> <b>Email: </b>$email <br> <b>Message: </b>$message <br>";
+
+    // Send Email here..
+
+    $admin->goTo("message-success", "i=$item_id");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -30,8 +48,11 @@ $user_id = $item->getDetail($item_id, "user_id");
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/OwlCarousel2-2.3.4/dist/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="assets/OwlCarousel2-2.3.4/dist/assets/owl.theme.default.min.css">
     <link rel="stylesheet" href="assets/css/all.min.css">
     <link rel="stylesheet" href="assets/css/fontawesome.min.css">
+    <link rel="stylesheet" href="assets/fontawesome-free-6.4.0-web/css/all.css">
     <link rel="stylesheet" href="assets/css/agent-signup-and-create-account.css">
     <link rel="stylesheet" href="assets/css/sign-in.css">
     <link rel="stylesheet" href="assets/css/agent-account.css">
@@ -54,45 +75,55 @@ $user_id = $item->getDetail($item_id, "user_id");
 
     <!-- product starts -->
     <div class="product">
-        <form action="" method="get">
 
+        <form action="product-listing" method="GET">
             <!-- input search -->
             <div class="input-search">
-                <input type="search" name="" id="" placeholder="Type your search here">
-                <button type="submit"><i class="fa fa-search"></i></button>
+                <input type="search" name="query" id="" placeholder="Type your search here">
+                <!-- <button type="submit"><i class="fa fa-search"></i></button> -->
             </div>
-
-
             <!-- dropdowns -->
 
             <div class="dropdown">
                 <div class="dropdown-options">
                     <div class="options">
                         <select name="category" id="category">
-                            <option value="category">Category</option>
-                            <option value="buy">Buy</option>
-                            <option value="rent">Rent</option>
-                            <option value="lease">Lease</option>
+                            <option value="">All Categories</option>
+                            <?php
+                            $types = $admin->getCategories();
+                            foreach ($types as $type) {
+                                echo "<option>$type</option>";
+                            }
+                            ?>
                         </select>
                     </div>
 
                     <div class="options">
-                        <select name="all-types" id="all-types">
-                            <option value="All types">All Types</option>
-                            <option value="flat">Flat</option>
-                            <option value="studio-apartment">Studio-Apartment</option>
-                            <option value="boys-quarters">Boys Quarters</option>
+                        <select name="type" id="all-types">
+                            <option value="">All Types</option>
+                            <?php
+                            $types = $admin->getTypes();
+                            foreach ($types as $type) {
+                                echo "<option>$type</option>";
+                            }
+                            ?>
                         </select>
                     </div>
 
                     <div class="options">
-                        <select name="bedrooms" id="bedrooms">
-                            <option value="bedrooms">Bedrooms</option>
+                        <select name="rooms" id="bedrooms">
+                            <!-- <option value="bedrooms">Bedrooms</option>
                             <option value="0 bedroom">Single Room</option>
                             <option value="1 bedroom">1 bedroom</option>
                             <option value="2 bedroom">2 bedrooms</option>
                             <option value="3 bedroom">3 bedrooms</option>
-                            <option value="4 bedroom">4 bedrooms and above</option>
+                            <option value="4 bedroom">4 bedrooms and above</option> -->
+                            <option value="">All Bedrooms</option>
+                            <?php
+                            for ($i = 0; $i < 1000; $i++) {
+                                echo "<option>$i</option>";
+                            }
+                            ?>
                         </select>
                     </div>
 
@@ -131,12 +162,12 @@ $user_id = $item->getDetail($item_id, "user_id");
                         </div>
                     </div>
 
-                    <div class="other-img">
+                    <div class="owl-carousel owl-theme other-img">
                         <?php
                         foreach ($images as $image) {
 
                         ?>
-                            <div class="img-box">
+                            <div class="item img-box">
                                 <img src="item-images/<?php echo $image; ?>" alt="" class="img2 item-other-image" image="<?php echo $image; ?>">
                             </div>
                         <?php
@@ -209,7 +240,7 @@ $user_id = $item->getDetail($item_id, "user_id");
                             $amenities = json_decode($item->getDetail($item_id, "amenities"));
                             foreach ($amenities as $amenity) {
                             ?>
-                                <p class="small"><?php echo $amenity; ?></p>
+                                <p class="small amenity"><?php echo $amenity; ?></p>
                             <?php
                             }
                             ?>
@@ -220,17 +251,42 @@ $user_id = $item->getDetail($item_id, "user_id");
 
                 <div class="call-agent">
                     <div class="button"><a href="tel:<?php echo $user->getDetail($user_id, "phone"); ?>">Call Agent</a></div>
-                    <div class="button"><a class="message-agent-btn" style="color: #333;">Message Agent</a></div>
+                    <div class="button"><a class="message-agent-btn" style="color: #333;" data-bs-toggle="modal" data-bs-target="#send_message_modal">Message Agent</a></div>
                 </div>
 
-                <div class="save-for-later">
-                    <div class="img">
-                        <img src="assets/img/Vector (5).png" alt="">
+                <?php
+                if (isset($_SESSION['user_id'])) {
+                ?>
+                    <div class="save-for-later save-for-later-logged-in">
+                        <div class="img">
+
+                            <i class="fa fa-heart save-item-heart <?php if ($user->haveSavedItem($item_id, $session_id)) {
+                                                                        echo "green";
+                                                                    } else {
+                                                                        echo "outline-green";
+                                                                    } ?>"></i>
+                        </div>
+                        <div>
+                            <p>Save for later</p>
+                        </div>
                     </div>
-                    <div>
-                        <p>Save for later</p>
+                <?php
+                } else {
+                ?>
+                    <div class="save-for-later" data-bs-toggle="modal" data-bs-target="#save_for_later_not_logged_in_modal">
+                        <div class="img">
+
+                            <i class="fa fa-heart outline-green"></i>
+                        </div>
+                        <div>
+                            <p>Save for later</p>
+                        </div>
                     </div>
-                </div>
+
+                <?php
+                }
+                ?>
+
             </div>
 
             <div class="contact-agent">
@@ -245,7 +301,7 @@ $user_id = $item->getDetail($item_id, "user_id");
 
                         <div class="call-agent">
                             <div class="button"><a href="tel:<?php echo $user->getDetail($user_id, "phone"); ?>">Call Agent</a></div>
-                            <div class="button"><a class="message-agent-btn" style="color: #333;">Message Agent</a></div>
+                            <div class="button"><a class="message-agent-btn" style="color: #333;" data-bs-toggle="modal" data-bs-target="#send_message_modal">Message Agent</a></div>
                         </div>
 
                     </div>
@@ -266,7 +322,11 @@ $user_id = $item->getDetail($item_id, "user_id");
 
                 <div class="similar-houses">
                     <?php
-                    $result = $db->setQuery("SELECT * FROM items ORDER BY id DESC LIMIT 8;");
+                    $title = $item->getDetail($item_id, "title");
+                    $price = $item->getDetail($item_id, "price");
+                    $location = $item->getDetail($item_id, "location");
+
+                    $result = $db->setQuery("SELECT * FROM items WHERE title LIKE '%$title%' OR price LIKE '%$price%' OR location LIKE '%$location%' ORDER BY id DESC LIMIT 8;");
                     $numrows = mysqli_num_rows($result);
 
                     if ($numrows > 0) {
@@ -277,51 +337,53 @@ $user_id = $item->getDetail($item_id, "user_id");
 
                             <?php
                             while ($row = mysqli_fetch_assoc($result)) {
-                                $images = json_decode($row['images']);
+                                if ($row['item_id'] != $item_id) {
+                                    $images = json_decode($row['images']);
                             ?>
-                                <a href="product?i=<?php echo $row['item_id']; ?>">
-                                    <div class="body">
-                                        <div class="img">
-                                            <img src="item-images/<?php echo $images[0]; ?>" alt="">
-                                            <div class="icon-price">
-                                                <div class="icons_and_more_description">
-                                                    <div class="bed-icon">
-                                                        <div class="bed-icon-img">
-                                                            <img src="assets/img/bed-icon.png">
+                                    <a href="product?i=<?php echo $row['item_id']; ?>">
+                                        <div class="body">
+                                            <div class="img">
+                                                <img src="item-images/<?php echo $images[0]; ?>" alt="">
+                                                <div class="icon-price">
+                                                    <div class="icons_and_more_description">
+                                                        <div class="bed-icon">
+                                                            <div class="bed-icon-img">
+                                                                <img src="assets/img/bed-icon.png">
+                                                            </div>
+                                                            <p><?php echo $row['number_of_rooms']; ?></p>
                                                         </div>
-                                                        <p><?php echo $row['number_of_rooms']; ?></p>
-                                                    </div>
-                                                    <div class="bed-icon">
-                                                        <div class="bed-icon-img">
-                                                            <img src="assets/img/bathtub-icon.png">
+                                                        <div class="bed-icon">
+                                                            <div class="bed-icon-img">
+                                                                <img src="assets/img/bathtub-icon.png">
+                                                            </div>
+                                                            <p><?php echo $row['number_of_bathrooms']; ?></p>
                                                         </div>
-                                                        <p><?php echo $row['number_of_bathrooms']; ?></p>
-                                                    </div>
-                                                    <div class="bed-icon">
-                                                        <div class="bed-icon-img">
-                                                            <img src="assets/img/bathroom-icon.png">
+                                                        <div class="bed-icon">
+                                                            <div class="bed-icon-img">
+                                                                <img src="assets/img/bathroom-icon.png">
+                                                            </div>
+                                                            <p><?php echo $row['number_of_toilets']; ?></p>
                                                         </div>
-                                                        <p><?php echo $row['number_of_toilets']; ?></p>
-                                                    </div>
 
+                                                    </div>
+                                                    <div class="price"><span>&#8358;</span><?php echo number_format($row['price']); ?></div>
                                                 </div>
-                                                <div class="price"><span>&#8358;</span><?php echo number_format($row['price']); ?></div>
+
                                             </div>
 
-                                        </div>
-
-                                        <div class="description">
-                                            <p style="font-weight: 700;"><?php echo $row['title']; ?></p>
-                                            <div class="location-and-time-listed">
-                                                <div><img src="assets/img/location.svg">
-                                                    <p><?php echo $row['location']; ?></p>
+                                            <div class="description">
+                                                <p style="font-weight: 700;"><?php echo $row['title']; ?></p>
+                                                <div class="location-and-time-listed">
+                                                    <div><img src="assets/img/location.svg">
+                                                        <p><?php echo $row['location']; ?></p>
+                                                    </div>
+                                                    <!-- <div><img src="assets/img/Vector.png" alt=""><p>2hrs</p></div> -->
                                                 </div>
-                                                <!-- <div><img src="assets/img/Vector.png" alt=""><p>2hrs</p></div> -->
                                             </div>
                                         </div>
-                                    </div>
-                                </a>
+                                    </a>
                         <?php
+                                }
                             }
                         }
                         ?>
@@ -334,12 +396,76 @@ $user_id = $item->getDetail($item_id, "user_id");
             </div>
         </div>
 
+
+
+        <!-- Send Mesage Modal -->
+        <div class="modal fade" id="send_message_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel" style="color:mediumseagreen;">Send Message</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="" method="GET">
+                        <div class="modal-body">
+
+                            <input type="hidden" name="i" value="<?php echo $item_id; ?>">
+                            <label>Full Name</label>
+                            <input type="text" name="name" class="form-control mb-2" required>
+
+                            <label>Email</label>
+                            <input type="email" name="email" class="form-control mb-2" required>
+
+                            <label>Message</label>
+                            <textarea name="message" style="height:150px;" class="form-control mb-2" required>
+                            </textarea>
+
+
+
+                        </div>
+                        <div class="modal-footer">
+                            <a class="btn btn-secondary" data-bs-dismiss="modal">Close</a>
+                            <button type="submit" class="btn btn-warning" name="send_message">Send</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- Save for later not logged in Modal -->
+        <div class="modal fade" id="save_for_later_not_logged_in_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel" style="color:mediumseagreen;">Please Log In</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+
+                        <p><i>You have to <a href="sign-in?i=<?php echo $item_id; ?>">login</a> or <a href="create-account?i=<?php echo $item_id; ?>">Sign up</a> to save this item</i></p>
+
+                    </div>
+                    <div class="modal-footer">
+                        <a class="btn btn-secondary" data-bs-dismiss="modal">Close</a>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+
     </div>
     <!-- product ends -->
 
     <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/OwlCarousel2-2.3.4/dist/owl.carousel.min.js"></script>
     <script defer src="assets/js/all.min.js"></script>
-    <script defer src="assets/js/fontawesome.min.js"></script>
+    <!-- <script defer src="assets/js/fontawesome.min.js"></script> -->
     <script defer src="assets/js/bootstrap.min.js"></script>
     <script src="assets/js/product.js"></script>
     <script defer src="assets/js/main.js"></script>
@@ -349,6 +475,56 @@ $user_id = $item->getDetail($item_id, "user_id");
             var image = $(this).attr("image");
             $(".item-main-image").attr("src", "item-images/" + image);
         })
+
+        $('.owl-carousel').owlCarousel({
+            loop: false,
+            margin: 10,
+            nav: false,
+            responsive: {
+                0: {
+                    items: 3
+                },
+                600: {
+                    items: 3
+                },
+                1000: {
+                    items: 3
+                }
+            }
+        })
+
+
+
+
+        $(".save-for-later-logged-in").click(function() {
+            saveItem();
+        })
+
+        function saveItem() {
+            var item_id = "<?php echo $item_id ?>";
+            $.ajax({
+
+                url: "ajax.php",
+                method: "POST",
+                async: true,
+                data: {
+                    "save_item": "yes",
+                    item_id
+                },
+                success: function(data) {
+                    console.log(data)
+                    if (data == "Saved") {
+                        $(".save-item-heart").removeClass("outline-green")
+                        $(".save-item-heart").addClass("green")
+                        alert("Saved");
+                    } else if (data == "unSaved") {
+                        $(".save-item-heart").removeClass("green")
+                        $(".save-item-heart").addClass("outline-green")
+                    }
+                }
+
+            });
+        }
     </script>
 </body>
 

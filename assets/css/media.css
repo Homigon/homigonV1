@@ -259,7 +259,8 @@
         margin-bottom: .6rem;
     }
     .verify form .one .r select {
-        width: 32.5%;
+        /* width: 32.5%; */
+        width: 95%;
     }
     .verify form .one textarea {
         width: 90%;

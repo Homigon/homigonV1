@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 10, 2023 at 06:33 PM
+-- Generation Time: Sep 18, 2023 at 07:35 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.28
 
@@ -137,7 +137,9 @@ CREATE TABLE `saved_items` (
 
 INSERT INTO `saved_items` (`id`, `item_id`, `user_id`) VALUES
 (9, '64cead010d549', '64ccb536adbf6'),
-(15, '64ceada67fae0', '64ccb4e83feaf');
+(15, '64ceada67fae0', '64ccb4e83feaf'),
+(17, '64ceb27485cac', '64ccb4e83feaf'),
+(19, '64ceb27485cac', '64d5a19cd71fa');
 
 -- --------------------------------------------------------
 
@@ -188,7 +190,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `user_id`, `user_type`, `firstname`, `lastname`, `email`, `phone`, `password`, `image`, `is_owner_or_agent`, `status`, `verification_status`, `time`, `date`, `time_created`) VALUES
-(5, '64ccb4e83feaf', 'Agent', 'John', 'Doe', 'john@gmail.com', '08023782363', '$2y$10$jZcdz.Pam/4PzsvB6EnYXuXsOYTbNLI9jpcZL.HwzTR/HEOZ.P75i', 'default.svg', 'Owner', 'Active', 'Verified', '1691137256', '04-08-23', 'Aug,04,2023 10:20 AM');
+(5, '64ccb4e83feaf', 'Agent', 'John', 'Doe', 'john@gmail.com', '08023782363', '$2y$10$jZcdz.Pam/4PzsvB6EnYXuXsOYTbNLI9jpcZL.HwzTR/HEOZ.P75i', 'default.svg', 'Owner', 'Active', 'Verified', '1691137256', '04-08-23', 'Aug,04,2023 10:20 AM'),
+(7, '64d5a0b13e658', 'Individual', 'Mary', 'Lanes', 'mary@gmail.com', '09038784758', '$2y$10$0HkgwxHmG/4aGDO09r32AuA36yzfwbnNuoSfGUsy9AoyL2K7MI0bS', 'default.svg', 'Empty', 'Active', 'Not Verified', '1691721907', '11-08-23', 'Aug,11,2023 04:45 AM'),
+(8, '64d5a19cd71fa', 'Agent', 'James', 'Cowell', 'james@gmail.com', '08023782363', '$2y$10$yNh/pJghKSKgUQvQT/20cehj3BP3eeixz6rj5pf32SpLQCrFgrzJS', 'default.svg', 'Owner', 'Active', 'Not Verified', '1691722141', '11-08-23', 'Aug,11,2023 04:49 AM');
 
 -- --------------------------------------------------------
 
@@ -310,7 +314,7 @@ ALTER TABLE `password_recovery_keys`
 -- AUTO_INCREMENT for table `saved_items`
 --
 ALTER TABLE `saved_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `types`
@@ -322,7 +326,7 @@ ALTER TABLE `types`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `verifications`

@@ -54,12 +54,12 @@ if (isset($_POST['submit'])) {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../assets/css/all.min.css">
-    <link rel="stylesheet" href="../assets/css/fontawesome.min.css">
-    <link rel="stylesheet" href="../assets/css/list-a-house.css">
-    <link rel="stylesheet" href="../assets/css/styles.css">
-    <!-- <link rel="stylesheet" href="../assets/css/example-styles.css"> -->
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css?v=<?php echo uniqid(); ?>">
+    <link rel="stylesheet" href="../assets/css/all.min.css?v=<?php echo uniqid(); ?>">
+    <link rel="stylesheet" href="../assets/css/fontawesome.min.css?v=<?php echo uniqid(); ?>">
+    <link rel="stylesheet" href="../assets/css/list-a-house.css?v=<?php echo uniqid(); ?>">
+    <link rel="stylesheet" href="../assets/css/styles.css?v=<?php echo uniqid(); ?>">
+    <!-- <link rel="stylesheet" href="../assets/css/example-styles.css?v=<?php echo uniqid(); ?>"> -->
 
 </head>
 

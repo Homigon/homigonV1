@@ -1,12 +1,10 @@
-
-
 /* create account */
 
-
-.create-account{
+.create-account {
     width: 100%;
 }
-.create-account .header-img{
+
+.create-account .header-img {
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-around;
@@ -14,20 +12,24 @@
     height: 200px;
     width: 100%;
     z-index: 1000;
+    margin-bottom: 0px;
     /* height: 200px; */
 }
+
+
 /* .create-account .header-img img{
     height: 200px;
 } */
 
-.create-account .header{
+.create-account .header {
     position: relative;
-    top: -100px;
-    display: flex;
-    justify-content: center;
+    top: -150px;
+    /* display: flex; */
+    /* justify-content: center; */
     /* padding-top: 100px; */
 }
-.create-account .header h3{
+
+.create-account .header h3 {
     color: #fff;
     text-align: center;
     font-size: 24px;
@@ -35,34 +37,42 @@
     line-height: 30px;
 }
 
-.remove-header-text{
+.create-account .header p {
+    width: 100%;
+    text-align: center;
+}
+
+.remove-header-text {
     display: none;
 }
-.create-account .body{
+
+.create-account .body {
     width: 100%;
     display: flex;
     flex-flow: row;
     justify-content: space-evenly;
 }
 
-.create-account .left{
+.create-account .left {
     /* display: flex; */
     width: 45%;
     flex-flow: row nowrap;
-
 }
 
-.create-account .left .form{
+.create-account .left .form {
     width: 100%;
     margin: 20px 0px 0px 100px;
     font-style: normal;
     font-weight: 700;
     font-size: 18px;
     line-height: 22px;
-  
 }
 
-.create-account .left .form .input{
+.create-account .left .form .form-check {
+    min-height: 0px;
+}
+
+.create-account .left .form .input {
     width: 75%;
     border: none;
     border-bottom: 1px solid #333;
@@ -70,25 +80,24 @@
     /* margin: 10px 0px; */
 }
 
-.create-account .left .form input:focus{
+.create-account .left .form input:focus {
     outline: none;
-
 }
 
-.create-account .left .form label{
+.create-account .left .form label {
     margin: 50px 0px -20px 0px;
 }
 
-
-.create-account .left .form  .checkbox{
+.create-account .left .form .checkbox {
     margin-top: 71px;
 }
 
-.create-account .left .form  .checkbox p{
+.create-account .left .form .checkbox p {
     padding: 10px 0;
+    margin-bottom: -30px;
 }
 
-.create-account .left .form .checkbox label{
+.create-account .left .form .checkbox label {
     font-weight: 400;
     font-size: 18px;
     line-height: 22.5px;
@@ -96,8 +105,7 @@
     display: block;
 }
 
-
-.create-account .left .form .button .create{
+.create-account .left .form .button .create {
     width: 75%;
     display: flex;
     flex-direction: row;
@@ -113,12 +121,9 @@
     color: #fff;
     font-weight: 700;
     line-height: 22.5px;
-    
 }
 
-
-
-.create-account .left .form .login{
+.create-account .left .form .login {
     margin: 69px 0px;
     display: flex;
     flex-flow: row nowrap;
@@ -126,19 +131,14 @@
     align-items: center;
 }
 
-
-.create-account .left .login-text a{
+.create-account .left .login-text a {
     text-decoration: none;
     color: #FFC700;
     padding-left: 10px;
     font-weight: 600;
 }
 
-
-
-
-
-.create-account  .right-logo{
+.create-account .right-logo {
     width: 50%;
     height: fit-content;
     display: flex;
@@ -147,48 +147,45 @@
     align-items: center;
     position: relative;
     top: 75px;
-    
 }
 
-.create-account  .right-logo p {
+.create-account .right-logo p {
     padding: 75px 0px 0px 0px;
 }
 
-.create-account  .right-logo img{
+.create-account .right-logo img {
     width: 75%;
     height: 75%;
-
 }
 
-.create-account .right-logo a{
+.create-account .right-logo a {
     color: #FFC700;
     text-decoration: none;
 }
 
+
 /* create account ends */
-
-
 
 
 /* agent sign-up starts */
 
-.agent-sign-up{
+.agent-sign-up {
     display: flex;
     flex-flow: column nowrap;
     justify-content: space-between;
-
 }
 
-.agent-sign-up div{
+.agent-sign-up div {
     display: inline;
-
 }
+
 
 /* agent sign-up ends */
 
+
 /* verify email */
 
-.verify-email{
+.verify-email {
     display: none;
     position: fixed;
     top: 0px;
@@ -197,10 +194,10 @@
     height: 100%;
     background: rgba(0, 0, 0, 0.1);
     z-index: 2000;
-    overflow-y:auto;
+    overflow-y: auto;
 }
 
-.verify-email .verify-email-box{
+.verify-email .verify-email-box {
     width: 450px;
     height: auto;
     display: flex;
@@ -214,27 +211,27 @@
     border-radius: 5px;
 }
 
-.verify-email h2{
+.verify-email h2 {
     width: 100%;
     text-align: center;
     margin-top: 10px;
-    
 }
 
-.verify-email img{
+.verify-email img {
     margin-top: 25px;
 }
 
-.verify-email .verify-email-box p{
+.verify-email .verify-email-box p {
     font-size: small;
     margin-top: 25px;
     text-align: center;
 }
 
-.verify-email .verify-email-box form{
+.verify-email .verify-email-box form {
     width: 100%;
 }
-.verify-email .verification-code{
+
+.verify-email .verification-code {
     display: flex;
     flex-flow: row;
     justify-content: space-between;
@@ -242,17 +239,16 @@
     width: 100%;
 }
 
-.verify-email .verification-code input{
+.verify-email .verification-code input {
     width: 50px;
     height: 70px;
     padding: 15px;
     font-size: 1.5rem;
     border: 2px solid #33CCA8;
     border-radius: 10px;
-
 }
 
-.verify-email button{
+.verify-email button {
     margin-top: 50px;
     height: 55px;
     float: right;
@@ -266,82 +262,67 @@
     position: relative;
 }
 
-.verify-email .verify-email-box .resend-div{
+.verify-email .verify-email-box .resend-div {
     align-self: flex-end;
 }
-.verify-email .verify-email-box .resend-div a{
+
+.verify-email .verify-email-box .resend-div a {
     text-decoration: none;
     color: #FFC700;
     font-size: 1rem;
     font-weight: 600;
 }
 
-
-
-@media only screen and (max-width: 991px){
-
-    .remove{
+@media only screen and (max-width: 991px) {
+    .remove {
         display: none;
     }
-
-    .show{
+    .show {
         display: block;
     }
-
-    .create-account .header{
+    .create-account .header {
         flex-flow: column;
         align-items: center;
         /* top: 0px; */
     }
-    .create-account .body{
+    .create-account .body {
         width: 100%;
         flex-flow: column;
         margin-top: -90px;
     }
-
-    .create-account .body .left{
+    .create-account .body .left {
         display: flex;
         justify-content: center;
         width: 100%;
     }
-
-    .create-account .body .left .form{
+    .create-account .body .left .form {
         padding: 0px 30px;
         margin: 0;
     }
-
-    .create-account .left .form .input{
+    .create-account .left .form .input {
         width: 100%;
     }
-
-
-
-    .create-account .body .left .form .button .create{
+    .create-account .body .left .form .button .create {
         width: 100%;
     }
-
-    .create-account .left .form .login{
+    .create-account .left .form .login {
         justify-content: center;
     }
-
-    .create-account .left .form  .checkbox{
+    .create-account .left .form .checkbox {
         margin-top: 41px;
     }
-
 }
 
-@media only screen and (max-width: 512px){
-
-    .verify-email .verify-email-box{
+@media only screen and (max-width: 512px) {
+    .verify-email .verify-email-box {
         width: 300px;
         padding: 20px;
     }
-    
-    .verify-email .verification-code{
+    .verify-email .verification-code {
         margin-top: 20px;
     }
-    .verify-email button{
-       margin-top: 20px;
+    .verify-email button {
+        margin-top: 20px;
         width: 150px;
         height: 45px;
         border-radius: 10px;

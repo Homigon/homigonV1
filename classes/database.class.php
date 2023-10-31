@@ -74,6 +74,27 @@ class Database
             } else {
                 return array("time" => $t, "time_frame" => "days",  "suffix" => "days");
             }
+        } else if ($time >= 604800 and $time < 2419200) {
+            $t = round($time / 604800);
+            if ($t == 1) {
+                return array("time" => $t, "time_frame" => "week", "suffix" => "wk");
+            } else {
+                return array("time" => $t, "time_frame" => "weeks",  "suffix" => "wks");
+            }
+        } else if ($time >= 2419200 and $time < 29030400) {
+            $t = round($time / 2419200);
+            if ($t == 1) {
+                return array("time" => $t, "time_frame" => "month", "suffix" => "mth");
+            } else {
+                return array("time" => $t, "time_frame" => "months",  "suffix" => "mths");
+            }
+        } else if ($time >= 29030400 and $time < 1451520000) {
+            $t = round($time / 29030400);
+            if ($t == 1) {
+                return array("time" => $t, "time_frame" => "year", "suffix" => "yr");
+            } else {
+                return array("time" => $t, "time_frame" => "years",  "suffix" => "yrs");
+            }
         } else if ($time < 0) {
             return array("time" => 0, "time_frame" => "0", "suffix" => "0");
         }

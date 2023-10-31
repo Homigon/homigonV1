@@ -63,19 +63,19 @@ if (isset($_POST['submit'])) {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/fontawesome.min.css">
-    <link rel="stylesheet" href="assets/css/agent-signup-and-create-account.css">
-    <link rel="stylesheet" href="assets/css/sign-in.css">
-    <link rel="stylesheet" href="assets/css/agent-account.css">
-    <link rel="stylesheet" href="assets/css/list-a-house.css">
-    <link rel="stylesheet" href="assets/css/list-a-house2.css">
-    <link rel="stylesheet" href="assets/css/faq.css">
-    <link rel="stylesheet" href="assets/css/product.css">
-    <link rel="stylesheet" href="assets/css/product-listing.css">
-    <link rel="stylesheet" href="assets/css/styles.css">
-    <link rel="stylesheet" href="assets/css/root.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css?v=<?php echo uniqid(); ?>">
+    <link rel="stylesheet" href="assets/css/all.min.css?v=<?php echo uniqid(); ?>">
+    <link rel="stylesheet" href="assets/css/fontawesome.min.css?v=<?php echo uniqid(); ?>">
+    <link rel="stylesheet" href="assets/css/agent-signup-and-create-account.css?v=<?php echo uniqid(); ?>">
+    <link rel="stylesheet" href="assets/css/sign-in.css?v=<?php echo uniqid(); ?>">
+    <link rel="stylesheet" href="assets/css/agent-account.css?v=<?php echo uniqid(); ?>">
+    <link rel="stylesheet" href="assets/css/list-a-house.css?v=<?php echo uniqid(); ?>">
+    <link rel="stylesheet" href="assets/css/list-a-house2.css?v=<?php echo uniqid(); ?>">
+    <link rel="stylesheet" href="assets/css/faq.css?v=<?php echo uniqid(); ?>">
+    <link rel="stylesheet" href="assets/css/product.css?v=<?php echo uniqid(); ?>">
+    <link rel="stylesheet" href="assets/css/product-listing.css?v=<?php echo uniqid(); ?>">
+    <link rel="stylesheet" href="assets/css/styles.css?v=<?php echo uniqid(); ?>">
+    <link rel="stylesheet" href="assets/css/root.css?v=<?php echo uniqid(); ?>">
 </head>
 
 <body>
@@ -89,8 +89,12 @@ if (isset($_POST['submit'])) {
             <!-- <img src="assets/img/background.png" alt="" style="width: 100%;"> -->
         </div>
         <div class="header">
-            <h3>Create Account</h3>
-
+            <h3>Create Agent Account</h3> &nbsp; &nbsp;
+            <p style="display:block;position:relative;top:-20px;">
+                <span>
+                    <a href="create-account" style="text-decoration: none; color: #ffc700;">Create Individual account?</a>
+                </span>
+            </p>
         </div>
         <div class="body">
             <div class="left">
@@ -134,20 +138,20 @@ if (isset($_POST['submit'])) {
                         <div class="checkbox">
                             <p>I am a</p>
                             <div class="form-check">
-                                <input name="is_owner_or_agent" class="form-check-input" type="radio" value="Owner" id="flexCheckDefault" required>
-                                <label class="form-check-label" for="flexCheckDefault">
+                                <input name="is_owner_or_agent" class="form-check-input" type="radio" value="Owner" id="property_owner" required>
+                                <label class="form-check-label" for="property_owner">
                                     Property Owner
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input name="is_owner_or_agent" class="form-check-input" type="radio" value="Agent" id="flexCheckDefault" required>
-                                <label class="form-check-label" for="flexCheckDefault">
+                                <input name="is_owner_or_agent" class="form-check-input" type="radio" value="Agent" id="property_agent" required>
+                                <label class="form-check-label" for="property_agent">
                                     Property Agent
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" required>
-                                <label class="form-check-label" for="flexCheckDefault">
+                                <input class="form-check-input" type="checkbox" value="" id="terms_and_conditions" required>
+                                <label class="form-check-label" for="terms_and_conditions">
                                     I accept the terms and conditions
                                 </label>
                             </div>

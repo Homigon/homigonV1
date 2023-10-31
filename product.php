@@ -46,22 +46,22 @@ if (isset($_GET['send_message'])) {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/OwlCarousel2-2.3.4/dist/assets/owl.carousel.min.css">
-    <link rel="stylesheet" href="assets/OwlCarousel2-2.3.4/dist/assets/owl.theme.default.min.css">
-    <link rel="stylesheet" href="assets/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/fontawesome.min.css">
-    <link rel="stylesheet" href="assets/fontawesome-free-6.4.0-web/css/all.css">
-    <link rel="stylesheet" href="assets/css/agent-signup-and-create-account.css">
-    <link rel="stylesheet" href="assets/css/sign-in.css">
-    <link rel="stylesheet" href="assets/css/agent-account.css">
-    <link rel="stylesheet" href="assets/css/list-a-house.css">
-    <link rel="stylesheet" href="assets/css/list-a-house2.css">
-    <link rel="stylesheet" href="assets/css/faq.css">
-    <link rel="stylesheet" href="assets/css/product.css">
-    <link rel="stylesheet" href="assets/css/product-listing.css">
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css?v=<?php echo uniqid(); ?>">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css?v=<?php echo uniqid(); ?>">
+    <link rel="stylesheet" href="assets/OwlCarousel2-2.3.4/dist/assets/owl.carousel.min.css?v=<?php echo uniqid(); ?>">
+    <link rel="stylesheet" href="assets/OwlCarousel2-2.3.4/dist/assets/owl.theme.default.min.css?v=<?php echo uniqid(); ?>">
+    <link rel="stylesheet" href="assets/css/all.min.css?v=<?php echo uniqid(); ?>">
+    <link rel="stylesheet" href="assets/css/fontawesome.min.css?v=<?php echo uniqid(); ?>">
+    <link rel="stylesheet" href="assets/fontawesome-free-6.4.0-web/css/all.css?v=<?php echo uniqid(); ?>">
+    <link rel="stylesheet" href="assets/css/agent-signup-and-create-account.css?v=<?php echo uniqid(); ?>">
+    <link rel="stylesheet" href="assets/css/sign-in.css?v=<?php echo uniqid(); ?>">
+    <link rel="stylesheet" href="assets/css/agent-account.css?v=<?php echo uniqid(); ?>">
+    <link rel="stylesheet" href="assets/css/list-a-house.css?v=<?php echo uniqid(); ?>">
+    <link rel="stylesheet" href="assets/css/list-a-house2.css?v=<?php echo uniqid(); ?>">
+    <link rel="stylesheet" href="assets/css/faq.css?v=<?php echo uniqid(); ?>">
+    <link rel="stylesheet" href="assets/css/product.css?v=<?php echo uniqid(); ?>">
+    <link rel="stylesheet" href="assets/css/product-listing.css?v=<?php echo uniqid(); ?>">
+    <link rel="stylesheet" href="assets/css/styles.css?v=<?php echo uniqid(); ?>">
 </head>
 
 <body>
@@ -199,7 +199,9 @@ if (isset($_GET['send_message'])) {
                             </div>
                             <div class="time" id="time-posted">
                                 <div class="img"><img src="assets/img/Vector.png" alt=""></div>
-                                <p> Posted <?php echo $db->format_time($item->getDetail($item_id, "time"))['time'] . " " . $db->format_time($item->getDetail($item_id, "time"))['time_frame']
+                                <p> Posted <?php
+                                            // print_r($item->getDetail($item_id, "time"));
+                                            echo $db->format_time($item->getDetail($item_id, "time"))['time'] . " " . $db->format_time($item->getDetail($item_id, "time"))['time_frame']
                                             ?> ago</p>
                             </div>
                         </div>
@@ -417,8 +419,7 @@ if (isset($_GET['send_message'])) {
                             <input type="email" name="email" class="form-control mb-2" required>
 
                             <label>Message</label>
-                            <textarea name="message" style="height:150px;" class="form-control mb-2" required>
-                            </textarea>
+                            <textarea name="message" style="height:150px;" class="form-control mb-2" required></textarea>
 
 
 

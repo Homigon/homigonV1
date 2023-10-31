@@ -62,18 +62,18 @@ if (isset($_POST['submit'])) {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/fontawesome.min.css">
-    <link rel="stylesheet" href="assets/css/agent-signup-and-create-account.css">
-    <link rel="stylesheet" href="assets/css/sign-in.css">
-    <link rel="stylesheet" href="assets/css/agent-account.css">
-    <link rel="stylesheet" href="assets/css/list-a-house.css">
-    <link rel="stylesheet" href="assets/css/list-a-house2.css">
-    <link rel="stylesheet" href="assets/css/faq.css">
-    <link rel="stylesheet" href="assets/css/product.css">
-    <link rel="stylesheet" href="assets/css/product-listing.css">
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css?v=<?php echo uniqid(); ?>">
+    <link rel="stylesheet" href="assets/css/all.min.css?v=<?php echo uniqid(); ?>">
+    <link rel="stylesheet" href="assets/css/fontawesome.min.css?v=<?php echo uniqid(); ?>">
+    <link rel="stylesheet" href="assets/css/agent-signup-and-create-account.css?v=<?php echo uniqid(); ?>">
+    <link rel="stylesheet" href="assets/css/sign-in.css?v=<?php echo uniqid(); ?>">
+    <link rel="stylesheet" href="assets/css/agent-account.css?v=<?php echo uniqid(); ?>">
+    <link rel="stylesheet" href="assets/css/list-a-house.css?v=<?php echo uniqid(); ?>">
+    <link rel="stylesheet" href="assets/css/list-a-house2.css?v=<?php echo uniqid(); ?>">
+    <link rel="stylesheet" href="assets/css/faq.css?v=<?php echo uniqid(); ?>">
+    <link rel="stylesheet" href="assets/css/product.css?v=<?php echo uniqid(); ?>">
+    <link rel="stylesheet" href="assets/css/product-listing.css?v=<?php echo uniqid(); ?>">
+    <link rel="stylesheet" href="assets/css/styles.css?v=<?php echo uniqid(); ?>">
 </head>
 
 <body>
@@ -95,7 +95,7 @@ if (isset($_POST['submit'])) {
             <h3>Create Account</h3>
             <p class="remove-header-text show" style="color: #fff; text-align: center;">Want to become an Agent? <br>
                 <span>
-                    <a href="create-account" style="text-decoration: none; color: #ffc700;">Create an Agent account</a>
+                    <a href="agent-sign-up" style="text-decoration: none; color: #ffc700;">Create an Agent account</a>
                 </span>
             </p>
         </div>

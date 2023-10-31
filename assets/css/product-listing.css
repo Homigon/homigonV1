@@ -452,7 +452,8 @@ input[type=checkbox] {
     /* filter modal */
     .filter-modal .filter-box {
         width: 450px;
-        height: 90rem;
+        /* height: 90rem; */
+        height: 70rem;
     }
     .filter-modal .filter-box .button {
         left: 50px;

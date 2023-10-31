@@ -74,7 +74,7 @@ if (isset($_GET['delete_type'])) {
     <!-- Custom styles for this page -->
     <link href="assets/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="../assets/bootstrap5/css/bootstrap5.min.css">
+    <link rel="stylesheet" href="../assets/bootstrap5/css/bootstrap5.min.css?v=<?php echo uniqid(); ?>">
 
     <!-- Custom styles for this template-->
     <link href="assets/css/sb-admin-2.min.css" rel="stylesheet">
